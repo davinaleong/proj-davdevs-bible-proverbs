@@ -1,0 +1,25 @@
+Settings:
+	- Text Size:
+		- Dropdown Modal
+		- Button to set to Default
+		- Values: Small, Medium, Large
+		- Default: Medium
+	- Favourite Theme
+		- Dropdown Modal
+		- Button to set to Default
+		- Values: Simple Light, Simple Dark, Dav/Devs Light, Dav/Devs Dark, Pretty Pink, Professional, Lamborghini, Teh Tarik
+		- Default: Dav/Devs Light
+	- Favourite Translation
+		- Dropdown Modal
+		- Button to set to Default
+		- Values: KJV, YLT
+		- Default: KJV
+	- Date Format
+		- Dropdown Modal
+		- Button to set to Default
+		- Values: Common date formats used around the world
+		- Default: dd mmm yyyy
+	- Persist settings
+		- Dropdown Modal
+		- Button to set to Default
+	- Default All button
