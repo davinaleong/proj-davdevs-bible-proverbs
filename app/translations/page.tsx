@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import translationsData from '../data/translations.json';
 
 export default function TranslationsPage() {
+  const router = useRouter();
   const [currentTranslation, setCurrentTranslation] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,16 +16,18 @@ export default function TranslationsPage() {
     setIsLoading(false);
   }, []);
 
-  // Handle translation switching
-  const switchTranslation = (translationCode: string) => {
+  // Handle translation selection and navigate to chapters
+  const selectTranslation = (translationCode: string) => {
     setCurrentTranslation(translationCode);
     localStorage.setItem('preferred-translation', translationCode);
+    // Navigate to chapters page with selected translation
+    router.push(`/chapters?translation=${translationCode}`);
   };
 
   return (
     <div>
       <header className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold">Translations</h1>
+        <h1 className="text-2xl font-semibold">Select Translation</h1>
         <span className="text-sm text-fg/70">
           {isLoading ? 'Loading...' : 
             `Current: ${translationsData.translations.find(t => t.code === currentTranslation)?.code || currentTranslation}`
@@ -31,14 +35,14 @@ export default function TranslationsPage() {
         </span>
       </header>
       
-      <div className="max-w-2xl space-y-2">
+      <div className="space-y-2">
         {translationsData.translations.map((translation) => {
           const isActive = currentTranslation === translation.code;
           
           return (
             <button
               key={translation.code}
-              onClick={() => switchTranslation(translation.code)}
+              onClick={() => selectTranslation(translation.code)}
               className={`
                 w-full flex items-center justify-between p-4 text-left 
                 border rounded-md transition-all duration-200
@@ -70,7 +74,7 @@ export default function TranslationsPage() {
         })}
       </div>
       
-      <div className="max-w-2xl not-visited:mt-8 p-4 bg-surface border border-border rounded-md">
+      <div className="not-visited:mt-8 p-4 bg-surface border border-border rounded-md">
         <h3 className="font-medium mb-2">About Translations</h3>
         <p className="text-sm text-fg/70">
           Your preferred Bible translation is automatically saved to your browser and will persist across sessions. 

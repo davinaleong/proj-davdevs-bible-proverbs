@@ -25,7 +25,7 @@ export default function ThemesPage() {
   return (
     <div>
       <header className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold">Themes</h1>
+        <h1 className="text-2xl font-semibold">Select Theme</h1>
         <span className="text-sm text-fg/70">
           {isLoading ? 'Loading...' : 
             `Current: ${themesData.themes.find(t => t.id === currentTheme)?.name || currentTheme}`
