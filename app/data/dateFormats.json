@@ -1,0 +1,55 @@
+{
+  "dateFormats": [
+    {
+      "id": "dd-mmm-yyyy",
+      "name": "dd mmm yyyy (Default)",
+      "format": "dd MMM yyyy",
+      "example": "03 Jan 2026",
+      "isDefault": true
+    },
+    {
+      "id": "d-mmmm-yyyy", 
+      "name": "d mmmm yyyy",
+      "format": "d MMMM yyyy",
+      "example": "3 January 2026"
+    },
+    {
+      "id": "yyyy-mm-dd",
+      "name": "yyyy-mm-dd",
+      "format": "yyyy-MM-dd",
+      "example": "2026-01-03"
+    },
+    {
+      "id": "mm-dd-yyyy",
+      "name": "mm/dd/yyyy",
+      "format": "MM/dd/yyyy",
+      "example": "01/03/2026"
+    },
+    {
+      "id": "dd-mm-yyyy",
+      "name": "dd/mm/yyyy", 
+      "format": "dd/MM/yyyy",
+      "example": "03/01/2026"
+    },
+    {
+      "id": "full-date",
+      "name": "EEEE, d mmmm yyyy",
+      "format": "EEEE, d MMMM yyyy",
+      "example": "Saturday, 3 January 2026"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Common",
+      "formats": ["dd-mmm-yyyy", "d-mmmm-yyyy", "yyyy-mm-dd"]
+    },
+    {
+      "name": "Regional",
+      "formats": ["mm-dd-yyyy", "dd-mm-yyyy"]
+    },
+    {
+      "name": "Descriptive", 
+      "formats": ["full-date"]
+    }
+  ]
+}

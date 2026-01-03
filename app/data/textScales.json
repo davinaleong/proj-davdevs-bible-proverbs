@@ -1,0 +1,39 @@
+{
+  "textScales": [
+    {
+      "id": "small",
+      "name": "Small",
+      "scale": 0.9,
+      "description": "Smaller text for more content on screen"
+    },
+    {
+      "id": "medium",
+      "name": "Medium (Default)",
+      "scale": 1.0,
+      "description": "Standard reading size",
+      "isDefault": true
+    },
+    {
+      "id": "large",
+      "name": "Large", 
+      "scale": 1.15,
+      "description": "Larger text for comfortable reading"
+    },
+    {
+      "id": "extra-large",
+      "name": "Extra Large",
+      "scale": 1.3,
+      "description": "Extra large text for accessibility"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Standard",
+      "scales": ["small", "medium", "large"]
+    },
+    {
+      "name": "Accessibility",
+      "scales": ["large", "extra-large"]
+    }
+  ]
+}

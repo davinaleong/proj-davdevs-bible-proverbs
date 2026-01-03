@@ -1,0 +1,73 @@
+{
+  "themes": [
+    {
+      "id": "minimal-light",
+      "name": "Minimal Light",
+      "description": "Clean and minimal light theme"
+    },
+    {
+      "id": "minimal-dark", 
+      "name": "Minimal Dark",
+      "description": "Clean and minimal dark theme"
+    },
+    {
+      "id": "davdevs-paper",
+      "name": "Dav/Devs Paper (Default)",
+      "description": "The default Dav/Devs light theme with paper-like warmth",
+      "isDefault": true
+    },
+    {
+      "id": "davdevs-night",
+      "name": "Dav/Devs Night", 
+      "description": "The Dav/Devs dark theme for evening reading"
+    },
+    {
+      "id": "rose-devotion",
+      "name": "Rose Devotion",
+      "description": "Soft rose tones for gentle study"
+    },
+    {
+      "id": "classic-editorial",
+      "name": "Classic Editorial",
+      "description": "Professional theme inspired by traditional publishing"
+    },
+    {
+      "id": "lamborghini",
+      "name": "Lamborghini",
+      "description": "Bold and dynamic theme with racing inspiration"
+    },
+    {
+      "id": "teh-tarik",
+      "name": "Teh Tarik",
+      "description": "Warm Malaysian-inspired theme with rich browns and creams"
+    },
+    {
+      "id": "accessible-light",
+      "name": "Accessible Light",
+      "description": "High contrast light theme optimized for color blind users"
+    },
+    {
+      "id": "accessible-dark",
+      "name": "Accessible Dark", 
+      "description": "High contrast dark theme optimized for color blind users"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Default",
+      "themes": ["davdevs-paper", "davdevs-night"]
+    },
+    {
+      "name": "Minimal",
+      "themes": ["minimal-light", "minimal-dark"]
+    },
+    {
+      "name": "Accessible",
+      "themes": ["accessible-light", "accessible-dark"]
+    },
+    {
+      "name": "Specialty",
+      "themes": ["rose-devotion", "classic-editorial", "lamborghini", "teh-tarik"]
+    }
+  ]
+}
