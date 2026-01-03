@@ -1,0 +1,10 @@
+{
+    "translations": [
+        "translation": "King James Version",
+        "abbreviation" "KJV",
+        "chapter": 3,
+        "verses": [
+            { "verse": 5, "text": "Trust in the LORD with all thine heart..." }
+        ]
+    ]
+}

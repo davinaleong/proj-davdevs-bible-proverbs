@@ -7,13 +7,30 @@
   --font-sans: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Font Sizes */
-  --font-size-xs: clamp(0.625rem, 0.6rem + 0.125vw, 0.75rem);      /* 10-12px - Small labels, copyright */
-  --font-size-sm: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);       /* 12-14px - Navigation, secondary text */
-  --font-size-base: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);       /* 14-16px - Body text, verse content */
-  --font-size-lg: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);           /* 16-18px - Chapter titles */
-  --font-size-xl: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);        /* 18-20px - Section headers */
-  --font-size-2xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);        /* 20-24px - Page titles */
-  --font-size-3xl: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);          /* 24-30px - Main headings like "Proverbs 1" */
+  --font-size-xs: clamp(0.625rem, 0.6rem + 0.125vw, 0.75rem);      /* Footer, copyright text */
+  --font-size-sm: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);       /* Navigation tabs, secondary info */
+  --font-size-base: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);       /* List items, form labels */
+  --font-size-lg: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);           /* Body text, verse content */
+  --font-size-xl: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);        /* Modal titles, section headers */
+  --font-size-2xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);        /* Page titles like "Translations" */
+  --font-size-3xl: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);          /* Main headings like "Proverb 1" */
+
+  /* Spacing */
+  --space-xs: 0.25rem;   /* 4px - Tight spacing */
+  --space-sm: 0.5rem;    /* 8px - Small gaps */
+  --space-md: 1rem;      /* 16px - Standard spacing */
+  --space-lg: 1.5rem;    /* 24px - Section spacing */
+  --space-xl: 2rem;      /* 32px - Large gaps */
+  --space-2xl: 3rem;     /* 48px - Page spacing */
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;  /* 4px - Small elements */
+  --radius-md: 0.5rem;   /* 8px - Buttons, cards */
+  --radius-lg: 0.75rem;  /* 12px - Modals */
+
+  /* Interactive */
+  --tap-target: 44px;    /* Minimum tap target size */
+  --focus-ring: 2px solid var(--color-primary);
 
   /* Neutrals / surfaces */
   --color-bg: oklch(0.99 0 0);
