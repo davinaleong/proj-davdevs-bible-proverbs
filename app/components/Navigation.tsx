@@ -15,7 +15,7 @@ export default function Navigation() {
 
   return (
     <nav className="border-b border-border bg-surface">
-      <div className="flex">
+      <div className="flex mx-auto w-full max-w-4xl px-4">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
