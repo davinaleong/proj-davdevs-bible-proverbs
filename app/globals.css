@@ -1,26 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* 1) Declare your semantic design tokens as Tailwind theme variables */
+@theme {
+  /* Fonts */
+  --font-sans: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Neutrals / surfaces */
+  --color-bg: oklch(0.99 0 0);
+  --color-fg: oklch(0.18 0 0);
+  --color-surface: oklch(0.97 0 0);
+  --color-border: oklch(0.9 0 0);
+
+  /* Brand */
+  --color-primary: oklch(0.62 0.18 255);
+  --color-primary-foreground: oklch(0.99 0 0);
+
+  /* Status */
+  --color-success: oklch(0.72 0.16 145);
+  --color-warning: oklch(0.8 0.16 85);
+  --color-danger: oklch(0.62 0.2 25);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* 2) Apply them to your base UI */
+@layer base {
+  html, body {
+    height: 100%;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-fg);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Default = light (already declared above) */
+
+html[data-theme="dark"] {
+  --color-bg: oklch(0.14 0 0);
+  --color-fg: oklch(0.95 0 0);
+  --color-surface: oklch(0.2 0 0);
+  --color-border: oklch(0.28 0 0);
+
+  --color-primary: oklch(0.72 0.14 255);
+  --color-primary-foreground: oklch(0.12 0 0);
+}
+
+html[data-theme="ocean"] {
+  --color-bg: oklch(0.985 0.01 220);
+  --color-fg: oklch(0.18 0.01 220);
+  --color-surface: oklch(0.965 0.02 220);
+  --color-border: oklch(0.88 0.03 220);
+
+  --color-primary: oklch(0.6 0.16 210);
+  --color-primary-foreground: oklch(0.99 0 0);
+}
+
+html[data-theme="rose"] {
+  --color-bg: oklch(0.99 0.01 15);
+  --color-fg: oklch(0.18 0.01 15);
+  --color-surface: oklch(0.97 0.02 15);
+  --color-border: oklch(0.9 0.03 15);
+
+  --color-primary: oklch(0.62 0.2 15);
+  --color-primary-foreground: oklch(0.99 0 0);
 }
