@@ -3,6 +3,7 @@
 import dateFormatsData from '../data/dateFormats.json';
 import textScalesData from '../data/textScales.json';
 import themesData from '../data/themes.json';
+import translationsData from '../data/translations.json';
 
 // Types
 export interface DateFormat {
@@ -25,6 +26,12 @@ export interface Theme {
   id: string;
   name: string;
   description: string;
+  isDefault?: boolean;
+}
+
+export interface Translation {
+  code: string;
+  name: string;
   isDefault?: boolean;
 }
 
@@ -116,4 +123,25 @@ export const formatDate = (date: Date, formatId?: string): string => {
 export const applyTextScale = (scaleId?: string): number => {
   const textScale = scaleId ? getTextScaleById(scaleId) : getDefaultTextScale();
   return textScale?.scale ?? 1.0;
+};
+
+// Translation Helpers
+export const getTranslations = (): Translation[] => {
+  return translationsData.translations;
+};
+
+export const getDefaultTranslation = (): Translation | undefined => {
+  return translationsData.translations.find(translation => translation.isDefault);
+};
+
+export const getTranslationByCode = (code: string): Translation | undefined => {
+  return translationsData.translations.find(translation => translation.code === code);
+};
+
+// Get today's Proverb chapter based on date
+export const getTodaysProverbChapter = (): number => {
+  const today = new Date();
+  const dayOfMonth = today.getDate();
+  // Ensure chapter is between 1-31 (Proverbs has 31 chapters)
+  return Math.min(dayOfMonth, 31);
 };

@@ -1,0 +1,21 @@
+{
+  "translations": [
+    {
+      "code": "KJV",
+      "name": "King James Version",
+      "isDefault": true
+    },
+    {
+      "code": "YLT", 
+      "name": "Young's Literal Translation"
+    },
+    {
+      "code": "WEB",
+      "name": "World English Bible"
+    },
+    {
+      "code": "ASV",
+      "name": "American Standard Version (1901)"
+    }
+  ]
+}
