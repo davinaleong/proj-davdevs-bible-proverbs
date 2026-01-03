@@ -58,8 +58,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="light">
-      <body className="min-h-screen flex flex-col">
+    <html lang="en" data-theme="davdevs-paper">      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const savedTheme = localStorage.getItem('preferred-theme') || 'davdevs-paper';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+              })();
+            `,
+          }}
+        />
+      </head>      <body className="min-h-screen flex flex-col">
         <Navigation />
         <main className="flex-1 px-4 py-6 mx-auto w-full max-w-4xl">
           {children}

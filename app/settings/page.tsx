@@ -64,7 +64,7 @@ export default function SettingsPage() {
       {/* Text Size Modal */}
       {showTextSizeModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-surface border border-border rounded-lg p-6 w-full max-w-sm">
+          <div className="bg-surface border border-border rounded-sm p-6 w-full max-w-sm">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold">Text Size</h2>
               <button 

@@ -32,20 +32,20 @@
   --tap-target: 44px;    /* Minimum tap target size */
   --focus-ring: 2px solid var(--color-primary);
 
-  /* Neutrals / surfaces */
-  --color-bg: oklch(0.99 0 0);
-  --color-fg: oklch(0.18 0 0);
-  --color-surface: oklch(0.97 0 0);
-  --color-border: oklch(0.9 0 0);
+  /* Neutrals / surfaces - Clean minimal design */
+  --color-bg: oklch(0.99 0 0);             /* Pure white background */
+  --color-fg: oklch(0.2 0 0);              /* Clean dark text */
+  --color-surface: oklch(0.96 0 0);        /* Light gray surface */
+  --color-border: oklch(0.88 0 0);         /* Subtle borders */
 
-  /* Brand */
-  --color-primary: oklch(0.62 0.18 255);
+  /* Brand - Dav/Devs logo colors */
+  --color-primary: oklch(0.45 0.18 260);   /* #155dfc - Primary blue */
   --color-primary-foreground: oklch(0.99 0 0);
 
   /* Status */
-  --color-success: oklch(0.72 0.16 145);
-  --color-warning: oklch(0.8 0.16 85);
-  --color-danger: oklch(0.62 0.2 25);
+  --color-success: oklch(0.55 0.12 145);
+  --color-warning: oklch(0.65 0.14 85);
+  --color-danger: oklch(0.55 0.15 25);
 }
 
 /* 2) Apply them to your base UI */
@@ -61,34 +61,158 @@
   }
 }
 
-/* Default = light (already declared above) */
+/* Default = davdevs-paper (paper theme foundation) */
 
-html[data-theme="dark"] {
-  --color-bg: oklch(0.14 0 0);
-  --color-fg: oklch(0.95 0 0);
-  --color-surface: oklch(0.2 0 0);
-  --color-border: oklch(0.28 0 0);
-
-  --color-primary: oklch(0.72 0.14 255);
-  --color-primary-foreground: oklch(0.12 0 0);
-}
-
-html[data-theme="ocean"] {
-  --color-bg: oklch(0.985 0.01 220);
-  --color-fg: oklch(0.18 0.01 220);
-  --color-surface: oklch(0.965 0.02 220);
-  --color-border: oklch(0.88 0.03 220);
-
-  --color-primary: oklch(0.6 0.16 210);
+/* Minimal Light Theme */
+html[data-theme="minimal-light"] {
+  --color-bg: oklch(0.99 0 0);
+  --color-fg: oklch(0.15 0 0);
+  --color-surface: oklch(0.97 0 0);
+  --color-border: oklch(0.88 0 0);
+  
+  --color-primary: oklch(0.35 0 0);
   --color-primary-foreground: oklch(0.99 0 0);
 }
 
-html[data-theme="rose"] {
-  --color-bg: oklch(0.99 0.01 15);
-  --color-fg: oklch(0.18 0.01 15);
-  --color-surface: oklch(0.97 0.02 15);
-  --color-border: oklch(0.9 0.03 15);
+/* Minimal Dark Theme */
+html[data-theme="minimal-dark"] {
+  --color-bg: oklch(0.08 0 0);
+  --color-fg: oklch(0.92 0 0);
+  --color-surface: oklch(0.12 0 0);
+  --color-border: oklch(0.22 0 0);
+  
+  --color-primary: oklch(0.85 0 0);
+  --color-primary-foreground: oklch(0.08 0 0);
+}
 
-  --color-primary: oklch(0.62 0.2 15);
+/* Dav/Devs Paper (Default) - Clean minimal light theme */
+html[data-theme="davdevs-paper"] {
+  --color-bg: oklch(0.99 0 0);             /* Pure white background */
+  --color-fg: oklch(0.2 0 0);              /* Clean dark text */
+  --color-surface: oklch(0.96 0 0);        /* Light gray surface */
+  --color-border: oklch(0.88 0 0);         /* Subtle borders */
+  
+  --color-primary: oklch(0.45 0.18 260);   /* #155dfc - Primary logo blue */
   --color-primary-foreground: oklch(0.99 0 0);
+}
+
+/* Dav/Devs Night Theme - Clean dark theme */
+html[data-theme="davdevs-night"] {
+  --color-bg: oklch(0.15 0 0);             /* Clean charcoal background */
+  --color-fg: oklch(0.9 0 0);              /* Light text */
+  --color-surface: oklch(0.18 0 0);        /* Slightly lighter surface */
+  --color-border: oklch(0.3 0 0);          /* Subtle borders */
+  
+  --color-primary: oklch(0.6 0.18 260);    /* Brighter #155dfc for dark theme */
+  --color-primary-foreground: oklch(0.15 0 0);
+}
+
+/* Pretty Pink Theme - Designed for girl readers */
+html[data-theme="rose-devotion"] {
+  --color-bg: oklch(0.94 0.03 350);        /* Soft pink background */
+  --color-fg: oklch(0.25 0.02 320);        /* Dark purple-pink text */
+  --color-surface: oklch(0.82 0.05 280);   /* Lavender purple surfaces */
+  --color-border: oklch(0.75 0.04 300);    /* Purple-pink borders */
+  
+  --color-primary: oklch(0.55 0.12 280);   /* Medium purple for links */
+  --color-primary-foreground: oklch(0.94 0.03 350);
+}
+
+/* Classic Editorial Theme */
+html[data-theme="classic-editorial"] {
+  --color-bg: oklch(0.95 0.005 60);
+  --color-fg: oklch(0.22 0.01 60);
+  --color-surface: oklch(0.92 0.008 60);
+  --color-border: oklch(0.78 0.015 60);
+  
+  --color-primary: oklch(0.42 0.08 60);
+  --color-primary-foreground: oklch(0.95 0.005 60);
+}
+
+/* Lamborghini Theme - Yellow Gallardo Inspired Light Theme */
+html[data-theme="lamborghini"] {
+  --color-bg: oklch(0.95 0.12 95);          /* Pure yellow background */
+  --color-fg: oklch(0.12 0.02 45);          /* Darker text for better contrast */
+  --color-surface: oklch(0.91 0.10 95);     /* Pure yellow surface with slight depth */
+  --color-border: oklch(0.78 0.08 95);      /* Pure yellow borders */
+  
+  --color-primary: oklch(0.75 0.15 90);     /* Pure bright yellow for buttons */
+  --color-primary-foreground: oklch(0.08 0.01 45);
+}
+
+/* Teh Tarik Theme */
+html[data-theme="teh-tarik"] {
+  --color-bg: oklch(0.94 0.02 75);
+  --color-fg: oklch(0.3 0.025 45);
+  --color-surface: oklch(0.9 0.025 75);
+  --color-border: oklch(0.75 0.03 75);
+  
+  --color-primary: oklch(0.48 0.1 45);
+  --color-primary-foreground: oklch(0.94 0.02 75);
+}
+
+/* Arctic Dawn Theme - Atmospheric blue-gray theme */
+html[data-theme="arctic-dawn"] {
+  --color-bg: oklch(0.45 0.025 220);       /* Atmospheric blue-gray background */
+  --color-fg: oklch(0.92 0.01 60);         /* Warm cream text for readability */
+  --color-surface: oklch(0.48 0.02 220);   /* Slightly lighter surface */
+  --color-border: oklch(0.55 0.02 220);    /* Subtle blue-gray borders */
+  
+  --color-primary: oklch(0.7 0.12 240);    /* Bright blue for links */
+  --color-primary-foreground: oklch(0.45 0.025 220);
+}
+
+/* Ocean Breeze Theme - Calming ocean blues */
+html[data-theme="ocean-breeze"] {
+  --color-bg: oklch(0.96 0.02 220);        /* Light ocean blue background */
+  --color-fg: oklch(0.15 0.01 240);        /* Deep navy text for readability */
+  --color-surface: oklch(0.92 0.03 220);   /* Soft blue surface */
+  --color-border: oklch(0.8 0.04 220);     /* Ocean blue borders */
+  
+  --color-primary: oklch(0.4 0.15 220);    /* Deep ocean blue for links */
+  --color-primary-foreground: oklch(0.96 0.02 220);
+}
+
+/* Patriot Red Theme - Bold red and white */
+html[data-theme="patriot-red"] {
+  --color-bg: oklch(0.98 0 0);             /* Clean white background */
+  --color-fg: oklch(0.15 0 0);             /* Dark text for readability */
+  --color-surface: oklch(0.95 0.02 15);    /* Light pink surface */
+  --color-border: oklch(0.85 0.04 15);     /* Light red borders */
+  
+  --color-primary: oklch(0.45 0.2 15);     /* Bold patriotic red */
+  --color-primary-foreground: oklch(0.98 0 0);
+}
+
+/* Liberty Flag Theme - Red, white, and blue */
+html[data-theme="liberty-flag"] {
+  --color-bg: oklch(0.98 0 0);             /* Clean white background */
+  --color-fg: oklch(0.15 0.01 240);        /* Navy blue text */
+  --color-surface: oklch(0.94 0.01 240);   /* Light blue surface */
+  --color-border: oklch(0.8 0.05 15);      /* Red borders for accent */
+  
+  --color-primary: oklch(0.35 0.18 240);   /* Deep patriotic blue */
+  --color-primary-foreground: oklch(0.98 0 0);
+}
+
+/* Accessible Light Theme */
+html[data-theme="accessible-light"] {
+  --color-bg: oklch(1 0 0);
+  --color-fg: oklch(0 0 0);
+  --color-surface: oklch(0.98 0 0);
+  --color-border: oklch(0.7 0 0);
+  
+  --color-primary: oklch(0.3 0 0);
+  --color-primary-foreground: oklch(1 0 0);
+}
+
+/* Accessible Dark Theme */
+html[data-theme="accessible-dark"] {
+  --color-bg: oklch(0 0 0);
+  --color-fg: oklch(1 0 0);
+  --color-surface: oklch(0.08 0 0);
+  --color-border: oklch(0.4 0 0);
+  
+  --color-primary: oklch(0.85 0 0);
+  --color-primary-foreground: oklch(0 0 0);
 }

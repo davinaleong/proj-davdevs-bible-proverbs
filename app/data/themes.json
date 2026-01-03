@@ -23,8 +23,8 @@
     },
     {
       "id": "rose-devotion",
-      "name": "Rose Devotion",
-      "description": "Soft rose tones for gentle study"
+      "name": "Pretty Pink",
+      "description": "Soft pink theme designed for girl readers"
     },
     {
       "id": "classic-editorial",
@@ -50,6 +50,26 @@
       "id": "accessible-dark",
       "name": "Accessible Dark", 
       "description": "High contrast dark theme optimized for color blind users"
+    },
+    {
+      "id": "arctic-dawn",
+      "name": "Arctic Dawn",
+      "description": "Atmospheric blue-gray theme inspired by misty mornings"
+    },
+    {
+      "id": "ocean-breeze",
+      "name": "Ocean Breeze",
+      "description": "Calming ocean blue theme for peaceful reading"
+    },
+    {
+      "id": "patriot-red",
+      "name": "Patriot Red",
+      "description": "Bold red and white theme with patriotic spirit"
+    },
+    {
+      "id": "liberty-flag",
+      "name": "Liberty Flag",
+      "description": "Classic red, white, and blue inspired by national flags"
     }
   ],
   "categories": [
@@ -67,7 +87,7 @@
     },
     {
       "name": "Specialty",
-      "themes": ["rose-devotion", "classic-editorial", "lamborghini", "teh-tarik"]
+      "themes": ["rose-devotion", "classic-editorial", "lamborghini", "teh-tarik", "arctic-dawn", "ocean-breeze", "patriot-red", "liberty-flag"]
     }
   ]
 }
