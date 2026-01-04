@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
-import Link from 'next/link';
 import { loadSettings, applyTextScale } from '../helpers/settings';
 import TermsContent from '../content/static/terms.mdx';
+import { BackLink, FooterLinks } from '../components';
 
 export default function TermsPage() {
   useEffect(() => {
@@ -14,35 +14,19 @@ export default function TermsPage() {
 
   return (
     <div className="max-w-4xl">
-      <div className="mb-6">
-        <Link 
-          href="/" 
-          className="text-primary hover:text-primary/80 transition-colors text-sm"
-        >
-          ← Back to Home
-        </Link>
-      </div>
+      <BackLink href="/">Back to Home</BackLink>
       
       <article className="chapter-content prose-static">
         <TermsContent />
       </article>
       
-      <div className="mt-8 pt-6 border-t border-border">
-        <div className="flex gap-4 justify-center">
-          <Link
-            href="/privacy"
-            className="text-primary hover:text-primary/80 transition-colors text-sm"
-          >
-            Privacy Policy
-          </Link>
-          <Link
-            href="/"
-            className="text-primary hover:text-primary/80 transition-colors text-sm"
-          >
-            Return to Home
-          </Link>
-        </div>
-      </div>
+      <FooterLinks
+        className="mt-8"
+        links={[
+          { href: '/privacy', label: 'Privacy Policy' },
+          { href: '/', label: 'Return to Home' }
+        ]}
+      />
     </div>
   );
 }

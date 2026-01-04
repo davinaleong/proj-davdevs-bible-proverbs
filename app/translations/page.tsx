@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import translationsData from '../data/translations.json';
 import { getCurrentTranslation, updateSetting } from '../helpers/settings';
+import { PageHeader, ButtonCard, Badge, InfoBox } from '../components';
 
 export default function TranslationsPage() {
   const router = useRouter();
@@ -31,35 +32,27 @@ export default function TranslationsPage() {
 
   return (
     <div>
-      <header className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-semibold">Select Translation</h1>
-          <p className="text-sm text-fg/70 mt-1">Choose your Bible translation, then select a chapter</p>
-        </div>
+      <PageHeader 
+        title="Select Translation"
+        subtitle="Choose your Bible translation, then select a chapter"
+      >
         <span className="text-sm text-fg/70">
           {isLoading ? 'Loading...' : 
             `Current: ${translationsData.translations.find(t => t.code === currentTranslation)?.code || currentTranslation}`
           }
         </span>
-      </header>
+      </PageHeader>
       
       <div className="space-y-3">
         {translationsData.translations.map((translation) => {
           const isActive = currentTranslation === translation.code;
           
           return (
-            <button
+            <ButtonCard
               key={translation.code}
               onClick={() => selectTranslation(translation.code)}
-              className={`
-                w-full flex items-center justify-between p-4 text-left 
-                border rounded-sm transition-all duration-200
-                min-h-[var(--tap-target)]
-                ${isActive 
-                  ? 'border-primary bg-primary/10 shadow-sm ring-2 ring-primary/20' 
-                  : 'border-border bg-surface hover:bg-border/20 hover:shadow-sm hover:border-primary/30'
-                }
-              `}
+              isActive={isActive}
+              className="w-full"
             >
               <div className="flex-1">
                 <div className="flex items-center gap-3">
@@ -69,14 +62,10 @@ export default function TranslationsPage() {
                   </div>
                   <div className="flex gap-2 ml-auto">
                     {translation.isDefault && (
-                      <span className="text-xs px-2 py-1 bg-accent/10 text-accent rounded-full font-medium">
-                        Default
-                      </span>
+                      <Badge variant="accent">Default</Badge>
                     )}
                     {isActive && (
-                      <span className="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full font-medium">
-                        ✓ Selected
-                      </span>
+                      <Badge variant="active">✓ Selected</Badge>
                     )}
                   </div>
                 </div>
@@ -84,13 +73,12 @@ export default function TranslationsPage() {
               <div className="text-primary/60">
                 →
               </div>
-            </button>
+            </ButtonCard>
           );
         })}
       </div>
       
-      <div className="mt-8 p-4 bg-surface border border-border rounded-sm">
-        <h3 className="font-medium mb-2">📖 About Translations</h3>
+      <InfoBox title="📖 About Translations" icon="">
         <p className="text-sm text-fg/70 leading-relaxed mb-3">
           Your selected translation will become your new favorite and will be used as the default for future visits. 
           Each translation offers a unique perspective on the wisdom of Proverbs.
@@ -99,7 +87,7 @@ export default function TranslationsPage() {
           <li><strong>KJV:</strong> Classic English with traditional language and phrasing</li>
           <li><strong>YLT:</strong> Literal translation maintaining Hebrew word order and meaning</li>
         </ul>
-      </div>
+      </InfoBox>
     </div>
   );
 }
