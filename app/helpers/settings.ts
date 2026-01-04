@@ -38,7 +38,7 @@ export const THEME_OPTIONS = [
 export const TRANSLATION_OPTIONS = [
   { value: 'KJV', label: 'KJV (King James Version)' },
   { value: 'YLT', label: 'YLT (Young\'s Literal Translation)' },
-  { value: 'WEB', label: 'WEB (World English Bible)' },
+  { value: 'WBT', label: 'WBT (Webster\'s Bible Translation)' },
   { value: 'ASV', label: 'ASV (American Standard Version)' },
 ] as const;
 

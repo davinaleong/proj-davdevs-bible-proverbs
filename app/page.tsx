@@ -111,7 +111,7 @@ function ChapterContent() {
     <div>
       <header className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-semibold">Proverbs {currentChapter}</h1>
+          <h1 className="text-3xl font-semibold">Today's Proverb</h1>
           <p className="text-sm text-fg/70 mt-1">{translationInfo?.name} ({currentTranslation})</p>
         </div>
         <div className="flex items-center gap-4">
