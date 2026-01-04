@@ -2,23 +2,23 @@
   "themes": [
     {
       "id": "minimal-light",
-      "name": "Minimal Light",
+      "name": "Simple Light",
       "description": "Clean and minimal light theme"
     },
     {
       "id": "minimal-dark", 
-      "name": "Minimal Dark",
+      "name": "Simple Dark",
       "description": "Clean and minimal dark theme"
     },
     {
       "id": "davdevs-paper",
-      "name": "Dav/Devs Paper (Default)",
+      "name": "Dav/Devs Light",
       "description": "The default Dav/Devs light theme with paper-like warmth",
       "isDefault": true
     },
     {
       "id": "davdevs-night",
-      "name": "Dav/Devs Night", 
+      "name": "Dav/Devs Dark", 
       "description": "The Dav/Devs dark theme for evening reading"
     },
     {
@@ -28,66 +28,18 @@
     },
     {
       "id": "classic-editorial",
-      "name": "Classic Editorial",
+      "name": "Professional",
       "description": "Professional theme inspired by traditional publishing"
     },
     {
-      "id": "lamborghini",
+      "id": "luxury-dark",
       "name": "Lamborghini",
-      "description": "Bold and dynamic theme with racing inspiration"
+      "description": "Bold and dynamic luxury theme with racing inspiration"
     },
     {
       "id": "teh-tarik",
       "name": "Teh Tarik",
       "description": "Warm Malaysian-inspired theme with rich browns and creams"
-    },
-    {
-      "id": "accessible-light",
-      "name": "Accessible Light",
-      "description": "High contrast light theme optimized for color blind users"
-    },
-    {
-      "id": "accessible-dark",
-      "name": "Accessible Dark", 
-      "description": "High contrast dark theme optimized for color blind users"
-    },
-    {
-      "id": "arctic-dawn",
-      "name": "Arctic Dawn",
-      "description": "Atmospheric blue-gray theme inspired by misty mornings"
-    },
-    {
-      "id": "ocean-breeze",
-      "name": "Ocean Breeze",
-      "description": "Calming ocean blue theme for peaceful reading"
-    },
-    {
-      "id": "patriot-red",
-      "name": "Patriot Red",
-      "description": "Bold red and white theme with patriotic spirit"
-    },
-    {
-      "id": "liberty-flag",
-      "name": "Liberty Flag",
-      "description": "Classic red, white, and blue inspired by national flags"
-    }
-  ],
-  "categories": [
-    {
-      "name": "Default",
-      "themes": ["davdevs-paper", "davdevs-night"]
-    },
-    {
-      "name": "Minimal",
-      "themes": ["minimal-light", "minimal-dark"]
-    },
-    {
-      "name": "Accessible",
-      "themes": ["accessible-light", "accessible-dark"]
-    },
-    {
-      "name": "Specialty",
-      "themes": ["rose-devotion", "classic-editorial", "lamborghini", "teh-tarik", "arctic-dawn", "ocean-breeze", "patriot-red", "liberty-flag"]
     }
   ]
 }

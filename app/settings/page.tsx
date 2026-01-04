@@ -1,113 +1,294 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { 
+  AppSettings, 
+  loadSettings, 
+  updateSetting, 
+  resetSettings,
+  TEXT_SIZE_OPTIONS,
+  THEME_OPTIONS,
+  TRANSLATION_OPTIONS,
+  DATE_FORMAT_OPTIONS,
+  PERSIST_SETTINGS_OPTIONS 
+} from '../helpers/settings';
+
+interface DropdownModalProps {
+  title: string;
+  options: readonly { value: any; label: string }[];
+  currentValue: any;
+  onSelect: (value: any) => void;
+  onClose: () => void;
+  onDefault?: () => void;
+  defaultValue?: any;
+}
+
+function DropdownModal({ 
+  title, 
+  options, 
+  currentValue, 
+  onSelect, 
+  onClose, 
+  onDefault,
+  defaultValue 
+}: DropdownModalProps) {
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+      <div className="bg-surface border border-border rounded-lg p-6 w-full max-w-md">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-medium">{title}</h2>
+          <button 
+            onClick={onClose}
+            className="text-fg/50 hover:text-fg text-xl"
+          >
+            ×
+          </button>
+        </div>
+        
+        <div className="space-y-2 mb-4">
+          {options.map((option) => (
+            <button
+              key={String(option.value)}
+              onClick={() => {
+                onSelect(option.value);
+                onClose();
+              }}
+              className={`
+                w-full text-left px-3 py-2 rounded transition-colors
+                ${currentValue === option.value 
+                  ? 'bg-primary/20 text-primary' 
+                  : 'hover:bg-border/20'
+                }
+              `}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+        
+        {onDefault && (
+          <div className="flex gap-2">
+            <button
+              onClick={() => {
+                if (defaultValue !== undefined) {
+                  onSelect(defaultValue);
+                }
+                onClose();
+              }}
+              className="px-4 py-2 text-sm bg-accent/10 text-accent rounded hover:bg-accent/20 transition-colors"
+            >
+              Set to Default
+            </button>
+            <button
+              onClick={onClose}
+              className="px-4 py-2 text-sm bg-border/20 rounded hover:bg-border/30 transition-colors"
+            >
+              Cancel
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function SettingsPage() {
-  const [showTextSizeModal, setShowTextSizeModal] = useState(false);
+  const [settings, setSettings] = useState<AppSettings>(() => loadSettings());
+  const [activeModal, setActiveModal] = useState<string | null>(null);
 
-  const settings = [
-    { label: 'Text Size', value: 'Medium' },
-    { label: 'Favourite Theme', value: 'DavDevs Light' },
-    { label: 'Favourite Translation', value: 'KJV' },
-    { label: 'Date Format', value: 'DD MMM YYYY' },
-    { label: 'Persist Settings', value: 'No' },
-  ];
+  // Load settings on component mount
+  useEffect(() => {
+    setSettings(loadSettings());
+  }, []);
 
-  const textSizeOptions = ['Small', 'Medium', 'Large'];
+  const handleUpdateSetting = <K extends keyof AppSettings>(
+    key: K, 
+    value: AppSettings[K]
+  ) => {
+    const newSettings = updateSetting(key, value);
+    setSettings(newSettings);
+  };
+
+  const handleResetAll = () => {
+    const newSettings = resetSettings();
+    setSettings(newSettings);
+    
+    // Apply theme and text size immediately
+    if (typeof window !== 'undefined') {
+      document.documentElement.setAttribute('data-theme', newSettings.favouriteTheme);
+      const root = document.documentElement;
+      root.style.setProperty('--text-scale', '1'); // Medium text size
+    }
+  };
+
+  const getDisplayValue = (key: keyof AppSettings): string => {
+    const value = settings[key];
+    
+    switch (key) {
+      case 'favouriteTheme':
+        return THEME_OPTIONS.find(opt => opt.value === value)?.label || String(value);
+      case 'favouriteTranslation':
+        return TRANSLATION_OPTIONS.find(opt => opt.value === value)?.label || String(value);
+      case 'dateFormat':
+        return DATE_FORMAT_OPTIONS.find(opt => opt.value === value)?.label || String(value);
+      case 'persistSettings':
+        return PERSIST_SETTINGS_OPTIONS.find(opt => opt.value === value)?.label || String(value);
+      default:
+        return String(value);
+    }
+  };
 
   return (
     <div className="max-w-2xl">
       <header className="mb-6">
         <h1 className="text-2xl font-semibold mb-2">Settings</h1>
-        <p className="text-sm text-fg/70">Click on the label to reset that setting.</p>
+        <p className="text-sm text-fg/70">Customize your reading experience</p>
       </header>
       
       <div className="space-y-4 mb-8">
-        {settings.map((setting, index) => (
-          <div key={index} className="flex items-center justify-between py-2">
-            <button 
-              className="text-base hover:text-primary transition-colors"
-              onClick={() => {
-                if (setting.label === 'Text Size') {
-                  setShowTextSizeModal(true);
-                }
-              }}
-            >
-              {setting.label}
-            </button>
-            <button 
-              className="
-                px-3 py-1 text-sm border border-border rounded
-                hover:bg-border/20 transition-colors
-                min-h-[32px]
-              "
-              onClick={() => {
-                if (setting.label === 'Text Size') {
-                  setShowTextSizeModal(true);
-                }
-              }}
-            >
-              {setting.value}
-            </button>
+        {/* Text Size */}
+        <div className="flex items-center justify-between py-3 border-b border-border/50">
+          <div>
+            <div className="font-medium">Text Size</div>
+            <div className="text-sm text-fg/70">Adjust the reading text size</div>
           </div>
-        ))}
+          <button 
+            onClick={() => setActiveModal('textSize')}
+            className="px-4 py-2 text-sm border border-border rounded hover:bg-border/20 transition-colors min-h-[32px]"
+          >
+            {settings.textSize}
+          </button>
+        </div>
+
+        {/* Favourite Theme */}
+        <div className="flex items-center justify-between py-3 border-b border-border/50">
+          <div>
+            <div className="font-medium">Favourite Theme</div>
+            <div className="text-sm text-fg/70">Choose your preferred visual style</div>
+          </div>
+          <button 
+            onClick={() => setActiveModal('favouriteTheme')}
+            className="px-4 py-2 text-sm border border-border rounded hover:bg-border/20 transition-colors min-h-[32px]"
+          >
+            {getDisplayValue('favouriteTheme')}
+          </button>
+        </div>
+
+        {/* Favourite Translation */}
+        <div className="flex items-center justify-between py-3 border-b border-border/50">
+          <div>
+            <div className="font-medium">Favourite Translation</div>
+            <div className="text-sm text-fg/70">Default Bible translation to display</div>
+          </div>
+          <button 
+            onClick={() => setActiveModal('favouriteTranslation')}
+            className="px-4 py-2 text-sm border border-border rounded hover:bg-border/20 transition-colors min-h-[32px]"
+          >
+            {getDisplayValue('favouriteTranslation')}
+          </button>
+        </div>
+
+        {/* Date Format */}
+        <div className="flex items-center justify-between py-3 border-b border-border/50">
+          <div>
+            <div className="font-medium">Date Format</div>
+            <div className="text-sm text-fg/70">How dates are displayed throughout the app</div>
+          </div>
+          <button 
+            onClick={() => setActiveModal('dateFormat')}
+            className="px-4 py-2 text-sm border border-border rounded hover:bg-border/20 transition-colors min-h-[32px]"
+          >
+            {getDisplayValue('dateFormat')}
+          </button>
+        </div>
+
+        {/* Persist Settings */}
+        <div className="flex items-center justify-between py-3 border-b border-border/50">
+          <div>
+            <div className="font-medium">Persist Settings</div>
+            <div className="text-sm text-fg/70">Save preferences in your browser</div>
+          </div>
+          <button 
+            onClick={() => setActiveModal('persistSettings')}
+            className="px-4 py-2 text-sm border border-border rounded hover:bg-border/20 transition-colors min-h-[32px]"
+          >
+            {getDisplayValue('persistSettings')}
+          </button>
+        </div>
       </div>
 
-      <button className="
-        px-4 py-2 text-sm border border-border rounded
-        hover:bg-border/20 transition-colors
-        min-h-[var(--tap-target)]
-      ">
-        Reset All Settings
-      </button>
+      {/* Default All Button */}
+      <div className="pt-4 border-t border-border">
+        <button
+          onClick={handleResetAll}
+          className="px-6 py-3 bg-danger/10 text-danger rounded-lg hover:bg-danger/20 transition-colors font-medium"
+        >
+          Reset All to Defaults
+        </button>
+        <p className="text-xs text-fg/60 mt-2">
+          This will reset all settings to their default values
+        </p>
+      </div>
 
-      {/* Text Size Modal */}
-      {showTextSizeModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-surface border border-border rounded-sm p-6 w-full max-w-sm">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold">Text Size</h2>
-              <button 
-                onClick={() => setShowTextSizeModal(false)}
-                className="text-fg/70 hover:text-fg"
-              >
-                Close
-              </button>
-            </div>
-            
-            <div className="space-y-2 mb-6">
-              {textSizeOptions.map((option) => (
-                <button
-                  key={option}
-                  className="
-                    w-full p-3 text-left border border-border rounded
-                    hover:bg-border/20 transition-colors
-                    min-h-[var(--tap-target)]
-                  "
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
+      {/* Modals */}
+      {activeModal === 'textSize' && (
+        <DropdownModal
+          title="Text Size"
+          options={TEXT_SIZE_OPTIONS}
+          currentValue={settings.textSize}
+          onSelect={(value) => handleUpdateSetting('textSize', value)}
+          onClose={() => setActiveModal(null)}
+          onDefault={() => handleUpdateSetting('textSize', 'Medium')}
+          defaultValue="Medium"
+        />
+      )}
 
-            <div className="flex items-center justify-between">
-              <button className="px-4 py-2 text-sm hover:text-primary transition-colors">
-                Default
-              </button>
-              <div className="space-x-3">
-                <button className="px-4 py-2 text-sm bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors">
-                  OK
-                </button>
-                <button 
-                  onClick={() => setShowTextSizeModal(false)}
-                  className="px-4 py-2 text-sm border border-border rounded hover:bg-border/20 transition-colors"
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+      {activeModal === 'favouriteTheme' && (
+        <DropdownModal
+          title="Favourite Theme"
+          options={THEME_OPTIONS}
+          currentValue={settings.favouriteTheme}
+          onSelect={(value) => handleUpdateSetting('favouriteTheme', value)}
+          onClose={() => setActiveModal(null)}
+          onDefault={() => handleUpdateSetting('favouriteTheme', 'davdevs-paper')}
+          defaultValue="davdevs-paper"
+        />
+      )}
+
+      {activeModal === 'favouriteTranslation' && (
+        <DropdownModal
+          title="Favourite Translation"
+          options={TRANSLATION_OPTIONS}
+          currentValue={settings.favouriteTranslation}
+          onSelect={(value) => handleUpdateSetting('favouriteTranslation', value)}
+          onClose={() => setActiveModal(null)}
+          onDefault={() => handleUpdateSetting('favouriteTranslation', 'KJV')}
+          defaultValue="KJV"
+        />
+      )}
+
+      {activeModal === 'dateFormat' && (
+        <DropdownModal
+          title="Date Format"
+          options={DATE_FORMAT_OPTIONS}
+          currentValue={settings.dateFormat}
+          onSelect={(value) => handleUpdateSetting('dateFormat', value)}
+          onClose={() => setActiveModal(null)}
+          onDefault={() => handleUpdateSetting('dateFormat', 'dd mmm yyyy')}
+          defaultValue="dd mmm yyyy"
+        />
+      )}
+
+      {activeModal === 'persistSettings' && (
+        <DropdownModal
+          title="Persist Settings"
+          options={PERSIST_SETTINGS_OPTIONS}
+          currentValue={settings.persistSettings}
+          onSelect={(value) => handleUpdateSetting('persistSettings', value)}
+          onClose={() => setActiveModal(null)}
+          onDefault={() => handleUpdateSetting('persistSettings', true)}
+          defaultValue={true}
+        />
       )}
     </div>
   );

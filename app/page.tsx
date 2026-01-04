@@ -4,6 +4,9 @@ import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import translationsData from './data/translations.json';
+import { getCurrentChapter, getProverbDescription, formatDate } from './helpers/date';
+import { loadSettings, getCurrentTranslation } from './helpers/settings';
+import { loadChapterContent, getChapterNavigation, preloadNextChapter, preloadPreviousChapter } from './helpers/content';
 
 // Loading component for suspense
 function ChapterContent() {
@@ -11,60 +14,71 @@ function ChapterContent() {
   const router = useRouter();
   const [currentTranslation, setCurrentTranslation] = useState<string>('');
   const [currentChapter, setCurrentChapter] = useState<number>(1);
-  const [content, setContent] = useState<string>('');
+  const [content, setContent] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string>('');
+  const [isToday, setIsToday] = useState<boolean>(false);
 
-  // Get translation and chapter from URL params or localStorage
+  // Get translation and chapter from URL params, settings, or defaults
   useEffect(() => {
     const urlTranslation = searchParams.get('translation');
     const urlChapter = searchParams.get('chapter');
-    const savedTranslation = localStorage.getItem('preferred-translation') || 'KJV';
     
-    const translation = urlTranslation || savedTranslation;
-    const chapter = urlChapter ? parseInt(urlChapter) : 1;
+    const translation = getCurrentTranslation(urlTranslation);
+    const chapter = urlChapter ? parseInt(urlChapter) : getCurrentChapter();
+    const todaysChapter = getCurrentChapter();
     
     setCurrentTranslation(translation);
     setCurrentChapter(chapter);
+    setIsToday(chapter === todaysChapter);
     
     // Load content
-    loadChapterContent(translation, chapter);
+    loadChapterContentAsync(translation, chapter);
+    
+    // Preload adjacent chapters for better UX
+    preloadNextChapter(translation, chapter);
+    preloadPreviousChapter(translation, chapter);
   }, [searchParams]);
 
-  const loadChapterContent = async (translation: string, chapter: number) => {
+  const loadChapterContentAsync = async (translation: string, chapter: number) => {
     setIsLoading(true);
     setError('');
     
     try {
-      // Try to import the MDX file
-      const chapterFile = await import(`./content/${translation}/chapter-${chapter}.mdx`);
+      const result = await loadChapterContent(translation, chapter);
       
-      // For now, we'll show a placeholder since we can't easily render MDX dynamically
-      // In a real implementation, you'd use an MDX parser or have pre-built content
-      const translationInfo = translationsData.translations.find(t => t.code === translation);
-      setContent(`Content for Proverbs Chapter ${chapter} (${translationInfo?.name || translation}) would be loaded here from the MDX file.`);
+      if (result.error) {
+        setError(result.error);
+        setContent(null);
+      } else {
+        setContent(result.content);
+        setError('');
+      }
       
     } catch (err) {
       console.error('Error loading chapter:', err);
-      setError(`Chapter ${chapter} not found for ${translation} translation.`);
+      setError(`Failed to load Chapter ${chapter} for ${translation} translation.`);
+      setContent(null);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const todaysDate = new Date().toLocaleDateString('en-US', {
-    day: 'numeric',
-    month: 'short', 
-    year: 'numeric'
-  });
-
+  const settings = loadSettings();
+  const todaysDate = formatDate(new Date(), settings.dateFormat);
   const translationInfo = translationsData.translations.find(t => t.code === currentTranslation);
+  const navigation = getChapterNavigation(currentChapter);
+
+  const goToToday = () => {
+    const todaysChapter = getCurrentChapter();
+    router.push(`/?translation=${currentTranslation}&chapter=${todaysChapter}`);
+  };
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-8">
         <div className="text-center">
-          <div className="text-lg font-medium mb-2">Loading Proverbs {currentChapter}...</div>
+          <div className="text-lg font-medium mb-2">Loading {getProverbDescription(currentChapter)}...</div>
           <div className="text-sm text-fg/70">{translationInfo?.name}</div>
         </div>
       </div>
@@ -82,12 +96,12 @@ function ChapterContent() {
           >
             Select Translation
           </Link>
-          <Link
-            href={`/chapters?translation=${currentTranslation}`}
+          <button
+            onClick={goToToday}
             className="text-primary hover:text-primary/80 transition-colors"
           >
-            Select Chapter
-          </Link>
+            Go to Today's Proverb
+          </button>
         </div>
       </div>
     );
@@ -103,50 +117,66 @@ function ChapterContent() {
         <div className="flex items-center gap-4">
           <span className="text-sm text-fg/70">{todaysDate}</span>
           <div className="flex gap-2">
+            {!isToday && (
+              <button
+                onClick={goToToday}
+                className="text-xs px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition-colors"
+              >
+                Today
+              </button>
+            )}
             <Link
               href="/translations"
               className="text-xs px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition-colors"
             >
               Translations
             </Link>
-            <Link
-              href={`/chapters?translation=${currentTranslation}`}
-              className="text-xs px-2 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition-colors"
-            >
-              Chapters
-            </Link>
           </div>
         </div>
       </header>
       
       <div className="prose prose-lg max-w-none">
-        <div className="mb-4 p-4 bg-surface border border-border rounded-md">
-          <p className="text-sm text-fg/70 mb-2">
-            <strong>Note:</strong> This is a placeholder implementation.
-          </p>
-          <p className="leading-relaxed">
+        {content ? (
+          <div className="chapter-content">
             {content}
-          </p>
-        </div>
+          </div>
+        ) : (
+          <div className="mb-4 p-4 bg-surface border border-border rounded-md">
+            <p className="text-sm text-fg/70 mb-2">
+              <strong>Note:</strong> MDX content loading not yet implemented.
+            </p>
+            <p className="leading-relaxed">
+              Content for Proverbs Chapter {currentChapter} ({translationInfo?.name || currentTranslation}) would be rendered here from the MDX file.
+            </p>
+          </div>
+        )}
         
         <div className="mt-6 p-4 bg-surface border border-border rounded-md">
           <h3 className="font-medium mb-2">Navigation</h3>
           <div className="flex gap-2 flex-wrap">
-            {currentChapter > 1 && (
+            {navigation.hasPrevious && (
               <Link
-                href={`/?translation=${currentTranslation}&chapter=${currentChapter - 1}`}
+                href={`/?translation=${currentTranslation}&chapter=${navigation.previousChapter}`}
                 className="text-xs px-3 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition-colors"
               >
-                ← Chapter {currentChapter - 1}
+                ← Chapter {navigation.previousChapter}
               </Link>
             )}
-            {currentChapter < 31 && (
+            {navigation.hasNext && (
               <Link
-                href={`/?translation=${currentTranslation}&chapter=${currentChapter + 1}`}
+                href={`/?translation=${currentTranslation}&chapter=${navigation.nextChapter}`}
                 className="text-xs px-3 py-1 bg-primary/10 text-primary rounded hover:bg-primary/20 transition-colors"
               >
-                Chapter {currentChapter + 1} →
+                Chapter {navigation.nextChapter} →
               </Link>
+            )}
+            {!isToday && (
+              <button
+                onClick={goToToday}
+                className="text-xs px-3 py-1 bg-accent/10 text-accent rounded hover:bg-accent/20 transition-colors ml-2"
+              >
+                📅 Go to Today's Proverb (Chapter {getCurrentChapter()})
+              </button>
             )}
           </div>
         </div>

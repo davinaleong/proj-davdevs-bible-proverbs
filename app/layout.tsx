@@ -63,8 +63,34 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
-                const savedTheme = localStorage.getItem('preferred-theme') || 'davdevs-paper';
-                document.documentElement.setAttribute('data-theme', savedTheme);
+                try {
+                  const stored = localStorage.getItem('dav-devs-bible-settings');
+                  let settings = {
+                    favouriteTheme: 'davdevs-paper',
+                    textSize: 'Medium'
+                  };
+                  
+                  if (stored) {
+                    const parsed = JSON.parse(stored);
+                    settings.favouriteTheme = parsed.favouriteTheme || 'davdevs-paper';
+                    settings.textSize = parsed.textSize || 'Medium';
+                  }
+                  
+                  // Apply theme
+                  document.documentElement.setAttribute('data-theme', settings.favouriteTheme);
+                  
+                  // Apply text size
+                  const textScaleMap = {
+                    'Small': '0.875',
+                    'Medium': '1',
+                    'Large': '1.125'
+                  };
+                  document.documentElement.style.setProperty('--text-scale', textScaleMap[settings.textSize] || '1');
+                } catch (error) {
+                  console.warn('Failed to load settings:', error);
+                  document.documentElement.setAttribute('data-theme', 'davdevs-paper');
+                  document.documentElement.style.setProperty('--text-scale', '1');
+                }
               })();
             `,
           }}
