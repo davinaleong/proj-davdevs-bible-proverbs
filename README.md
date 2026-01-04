@@ -1,9 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dav/Devs Bible Proverbs
+
+A modern, responsive web application for reading the Book of Proverbs with multiple Bible translations. Built with Next.js and powered by bible-api.com.
+
+## Features
+
+- 📖 **Daily Proverbs**: Automatically displays the chapter corresponding to today's date
+- 🌍 **Multiple Translations**: Choose from 6 Bible translations:
+  - **WEB** - World English Bible (default)
+  - **ASV** - American Standard Version (1901)
+  - **BBE** - Bible in Basic English
+  - **Darby** - Darby Bible
+  - **DRA** - Douay-Rheims 1899 American Edition
+  - **KJV** - King James Version
+- 🎨 **15+ Beautiful Themes**: From minimal to luxurious designs
+- 📱 **Responsive Design**: Works perfectly on all devices
+- ⚡ **Fast & Offline-Ready**: Progressive Web App capabilities
+- 🔧 **Customizable**: Text size, themes, date formats, and more
+- 🔒 **Privacy-First**: All settings stored locally, no tracking
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js (version 16 or higher)
+- npm, yarn, pnpm, or bun
 
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/proj-davdevs-bible-proverbs.git
+cd proj-davdevs-bible-proverbs
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
 # or
@@ -14,23 +52,79 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+├── components/         # Reusable UI components
+├── content/           # Static content (Terms, Privacy)
+├── data/              # JSON configuration files
+├── helpers/           # Utility functions and API services
+├── chapters/          # Chapter selection page
+├── translations/      # Translation selection page
+├── settings/          # User settings page
+├── privacy/           # Privacy policy page
+└── terms/             # Terms of service page
+```
 
-## Learn More
+## API Integration
 
-To learn more about Next.js, take a look at the following resources:
+This application uses [bible-api.com](https://bible-api.com/) to fetch Bible content:
+- Rate limited to 15 requests per 30 seconds
+- CORS enabled for browser usage
+- Public domain and freely-licensed translations
+- RESTful JSON API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## User Flow
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Select Translation** → Choose your preferred Bible version
+2. **Select Chapter** → Pick from Proverbs chapters 1-31
+3. **Read & Navigate** → Enjoy the content with easy navigation
+
+## Customization
+
+The app offers extensive customization options:
+- **Themes**: 15+ carefully designed themes
+- **Text Size**: Adjustable reading comfort
+- **Date Format**: Multiple display options
+- **Storage**: Option to persist or reset settings
+
+## Build & Deploy
+
+Build the application for production:
+
+```bash
+npm run build
+npm start
+```
 
 ## Deploy on Vercel
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/proj-davdevs-bible-proverbs)
+
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [bible-api.com](https://bible-api.com/) for providing the Bible API
+- [Next.js](https://nextjs.org/) for the React framework
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- All the Bible translation teams for their valuable work
+
+---
+
+*Built with ❤️ for daily Bible reading and spiritual growth*
