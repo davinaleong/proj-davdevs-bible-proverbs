@@ -2,6 +2,8 @@
 
 A modern, responsive web application for reading the Book of Proverbs with multiple Bible translations. Built with Next.js and powered by bible-api.com.
 
+*This project was inspired by my senior pastor, Pastor Joseph Prince, whose teachings on grace and the wisdom of Proverbs have been a tremendous blessing.*
+
 ## Features
 
 - 📖 **Daily Proverbs**: Automatically displays the chapter corresponding to today's date
