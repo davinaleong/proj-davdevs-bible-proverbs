@@ -67,29 +67,41 @@ export default function RootLayout({
                   const stored = localStorage.getItem('dav-devs-bible-settings');
                   let settings = {
                     favouriteTheme: 'davdevs-paper',
-                    textSize: 'Medium'
+                    textScale: 'medium'
                   };
                   
                   if (stored) {
                     const parsed = JSON.parse(stored);
                     settings.favouriteTheme = parsed.favouriteTheme || 'davdevs-paper';
-                    settings.textSize = parsed.textSize || 'Medium';
+                    // Support backward compatibility with textSize
+                    if (parsed.textScale) {
+                      settings.textScale = parsed.textScale;
+                    } else if (parsed.textSize) {
+                      // Map old textSize values to new textScale IDs
+                      const sizeMap = {
+                        'Small': 'small',
+                        'Medium': 'medium', 
+                        'Large': 'large'
+                      };
+                      settings.textScale = sizeMap[parsed.textSize] || 'medium';
+                    }
                   }
                   
                   // Apply theme
                   document.documentElement.setAttribute('data-theme', settings.favouriteTheme);
                   
-                  // Apply text size
+                  // Apply text scale
                   const textScaleMap = {
-                    'Small': '0.875',
-                    'Medium': '1',
-                    'Large': '1.125'
+                    'small': '0.9',
+                    'medium': '1.0',
+                    'large': '1.15',
+                    'extra-large': '1.3'
                   };
-                  document.documentElement.style.setProperty('--text-scale', textScaleMap[settings.textSize] || '1');
+                  document.documentElement.style.setProperty('--text-scale', textScaleMap[settings.textScale] || '1.0');
                 } catch (error) {
                   console.warn('Failed to load settings:', error);
                   document.documentElement.setAttribute('data-theme', 'davdevs-paper');
-                  document.documentElement.style.setProperty('--text-scale', '1');
+                  document.documentElement.style.setProperty('--text-scale', '1.0');
                 }
               })();
             `,

@@ -6,7 +6,7 @@ import {
   loadSettings, 
   updateSetting, 
   resetSettings,
-  TEXT_SIZE_OPTIONS,
+  TEXT_SCALE_OPTIONS,
   THEME_OPTIONS,
   TRANSLATION_OPTIONS,
   DATE_FORMAT_OPTIONS,
@@ -113,11 +113,11 @@ export default function SettingsPage() {
     const newSettings = resetSettings();
     setSettings(newSettings);
     
-    // Apply theme and text size immediately
+    // Apply theme and text scale immediately
     if (typeof window !== 'undefined') {
       document.documentElement.setAttribute('data-theme', newSettings.favouriteTheme);
       const root = document.documentElement;
-      root.style.setProperty('--text-scale', '1'); // Medium text size
+      root.style.setProperty('--text-scale', '1'); // Medium text scale
     }
   };
 
@@ -125,6 +125,8 @@ export default function SettingsPage() {
     const value = settings[key];
     
     switch (key) {
+      case 'textScale':
+        return TEXT_SCALE_OPTIONS.find(opt => opt.value === value)?.label || String(value);
       case 'favouriteTheme':
         return THEME_OPTIONS.find(opt => opt.value === value)?.label || String(value);
       case 'favouriteTranslation':
@@ -139,24 +141,24 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="max-w-2xl">
+    <div>
       <header className="mb-6">
         <h1 className="text-2xl font-semibold mb-2">Settings</h1>
         <p className="text-sm text-fg/70">Customize your reading experience</p>
       </header>
       
       <div className="space-y-4 mb-8">
-        {/* Text Size */}
+        {/* Text Scale */}
         <div className="flex items-center justify-between py-3 border-b border-border/50">
           <div>
             <div className="font-medium">Text Size</div>
             <div className="text-sm text-fg/70">Adjust the reading text size</div>
           </div>
           <button 
-            onClick={() => setActiveModal('textSize')}
+            onClick={() => setActiveModal('textScale')}
             className="px-4 py-2 text-sm border border-border rounded hover:bg-border/20 transition-colors min-h-[32px]"
           >
-            {settings.textSize}
+            {getDisplayValue('textScale')}
           </button>
         </div>
 
@@ -231,15 +233,15 @@ export default function SettingsPage() {
       </div>
 
       {/* Modals */}
-      {activeModal === 'textSize' && (
+      {activeModal === 'textScale' && (
         <DropdownModal
           title="Text Size"
-          options={TEXT_SIZE_OPTIONS}
-          currentValue={settings.textSize}
-          onSelect={(value) => handleUpdateSetting('textSize', value)}
+          options={TEXT_SCALE_OPTIONS}
+          currentValue={settings.textScale}
+          onSelect={(value) => handleUpdateSetting('textScale', value)}
           onClose={() => setActiveModal(null)}
-          onDefault={() => handleUpdateSetting('textSize', 'Medium')}
-          defaultValue="Medium"
+          onDefault={() => handleUpdateSetting('textScale', 'medium')}
+          defaultValue="medium"
         />
       )}
 

@@ -135,17 +135,17 @@ function ChapterContent() {
         </div>
       </header>
       
-      <div className="prose prose-lg max-w-none">
+      <div className="max-w-none" style={{ fontSize: 'var(--font-size-lg)', lineHeight: '1.7' }}>
         {content ? (
-          <div className="chapter-content">
+          <div className="chapter-content space-y-4">
             {content}
           </div>
         ) : (
           <div className="mb-4 p-4 bg-surface border border-border rounded-md">
-            <p className="text-sm text-fg/70 mb-2">
+            <p className="mb-2" style={{ fontSize: 'var(--font-size-base)' }}>
               <strong>Note:</strong> MDX content loading not yet implemented.
             </p>
-            <p className="leading-relaxed">
+            <p className="leading-relaxed" style={{ fontSize: 'var(--font-size-lg)' }}>
               Content for Proverbs Chapter {currentChapter} ({translationInfo?.name || currentTranslation}) would be rendered here from the MDX file.
             </p>
           </div>

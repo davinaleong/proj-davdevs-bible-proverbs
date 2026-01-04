@@ -2,8 +2,10 @@
  * Settings utilities for the Dav/Devs Bible Proverbs app
  */
 
+import textScalesData from '../data/textScales.json';
+
 export interface AppSettings {
-  textSize: 'Small' | 'Medium' | 'Large';
+  textScale: string;
   favouriteTheme: string;
   favouriteTranslation: string;
   dateFormat: string;
@@ -11,18 +13,17 @@ export interface AppSettings {
 }
 
 export const DEFAULT_SETTINGS: AppSettings = {
-  textSize: 'Medium',
+  textScale: 'medium',
   favouriteTheme: 'davdevs-paper',
   favouriteTranslation: 'KJV',
   dateFormat: 'dd mmm yyyy',
   persistSettings: true,
 };
 
-export const TEXT_SIZE_OPTIONS = [
-  { value: 'Small', label: 'Small' },
-  { value: 'Medium', label: 'Medium' },
-  { value: 'Large', label: 'Large' },
-] as const;
+export const TEXT_SCALE_OPTIONS = textScalesData.textScales.map(scale => ({
+  value: scale.id,
+  label: scale.name
+}));
 
 export const THEME_OPTIONS = [
   { value: 'minimal-light', label: 'Simple Light' },
@@ -70,7 +71,7 @@ export function loadSettings(): AppSettings {
       const parsed = JSON.parse(stored);
       // Ensure all required properties exist with defaults
       return {
-        textSize: parsed.textSize || DEFAULT_SETTINGS.textSize,
+        textScale: parsed.textScale || parsed.textSize || DEFAULT_SETTINGS.textScale,
         favouriteTheme: parsed.favouriteTheme || DEFAULT_SETTINGS.favouriteTheme,
         favouriteTranslation: parsed.favouriteTranslation || DEFAULT_SETTINGS.favouriteTranslation,
         dateFormat: parsed.dateFormat || DEFAULT_SETTINGS.dateFormat,
@@ -128,25 +129,18 @@ export function applyTheme(theme: string): void {
 }
 
 /**
- * Apply text size CSS variable
+ * Apply text scale CSS variable
  */
-export function applyTextSize(textSize: 'Small' | 'Medium' | 'Large'): void {
+export function applyTextScale(textScaleId: string): void {
   if (typeof window === 'undefined') {
     return;
   }
 
+  const textScale = textScalesData.textScales.find(scale => scale.id === textScaleId);
+  const scaleValue = textScale ? textScale.scale.toString() : '1';
+  
   const root = document.documentElement;
-  switch (textSize) {
-    case 'Small':
-      root.style.setProperty('--text-scale', '0.875');
-      break;
-    case 'Medium':
-      root.style.setProperty('--text-scale', '1');
-      break;
-    case 'Large':
-      root.style.setProperty('--text-scale', '1.125');
-      break;
-  }
+  root.style.setProperty('--text-scale', scaleValue);
 }
 
 /**
@@ -175,8 +169,8 @@ export function updateSetting<K extends keyof AppSettings>(
   // Apply the setting immediately if it affects the UI
   if (key === 'favouriteTheme') {
     applyTheme(value as string);
-  } else if (key === 'textSize') {
-    applyTextSize(value as 'Small' | 'Medium' | 'Large');
+  } else if (key === 'textScale') {
+    applyTextScale(value as string);
   }
   
   return newSettings;
