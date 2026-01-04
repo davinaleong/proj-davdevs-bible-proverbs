@@ -75,7 +75,10 @@
   p { font-size: var(--font-size-base); }
   
   /* Interface text scaling */
-  button { font-size: var(--font-size-sm); }
+  button { 
+    font-size: var(--font-size-sm); 
+    cursor: pointer;
+  }
   .text-xs { font-size: var(--font-size-xs) !important; }
   .text-sm { font-size: var(--font-size-sm) !important; }
   .text-base { font-size: var(--font-size-base) !important; }
@@ -315,18 +318,18 @@ html[data-theme="classic-editorial"] {
 /* Lamborghini Theme - Authentic Gallardo Yellow Theme */
 html[data-theme="lamborghini"] {
   --color-bg: oklch(0.96 0.18 85);          /* Authentic Gallardo yellow background */
-  --color-fg: oklch(0.15 0.03 85);          /* Dark yellow-brown text */
-  --color-surface: oklch(0.92 0.15 85);     /* Rich Gallardo yellow surface */
-  --color-border: oklch(0.75 0.12 85);      /* Medium Gallardo yellow borders */
+  --color-fg: oklch(0.08 0.01 85);          /* Much darker text for better readability */
+  --color-surface: oklch(0.88 0.12 85);     /* More contrasted surface */
+  --color-border: oklch(0.65 0.08 85);      /* Darker, more visible borders */
   
-  --color-primary: oklch(0.70 0.20 85);     /* Vibrant Gallardo yellow for buttons */
-  --color-primary-foreground: oklch(0.10 0.02 85);
+  --color-primary: oklch(0.65 0.18 85);     /* Slightly darker primary for better contrast */
+  --color-primary-foreground: oklch(0.05 0.01 85);  /* Very dark text on primary */
 
   /* Status colors in yellow tones */
-  --color-success: oklch(0.65 0.15 85);     /* Success in yellow tone */
-  --color-warning: oklch(0.80 0.18 85);     /* Bright warning yellow */
-  --color-danger: oklch(0.50 0.20 85);      /* Darker yellow-orange danger */
-  --color-accent: oklch(0.75 0.16 85);      /* Accent yellow */
+  --color-success: oklch(0.60 0.12 85);     /* Success in yellow tone */
+  --color-warning: oklch(0.75 0.15 85);     /* Bright warning yellow */
+  --color-danger: oklch(0.45 0.18 85);      /* Darker yellow-orange danger */
+  --color-accent: oklch(0.70 0.14 85);      /* Accent yellow */
 }
 
 /* Teh Tarik Theme */
@@ -404,4 +407,140 @@ html[data-theme="accessible-dark"] {
   
   --color-primary: oklch(0.85 0 0);
   --color-primary-foreground: oklch(0 0 0);
+}
+
+/* Water Flow Theme - Calming aquatic blues */
+html[data-theme="water-flow"] {
+  --color-bg: oklch(0.94 0.04 210);         /* Light water blue background */
+  --color-fg: oklch(0.12 0.02 210);         /* Deep ocean blue text */
+  --color-surface: oklch(0.90 0.06 210);    /* Flowing water surface */
+  --color-border: oklch(0.75 0.08 210);     /* Ripple borders */
+  
+  --color-primary: oklch(0.35 0.15 210);    /* Deep water blue for links */
+  --color-primary-foreground: oklch(0.94 0.04 210);
+
+  /* Status colors in aquatic tones */
+  --color-success: oklch(0.45 0.12 180);    /* Teal success */
+  --color-warning: oklch(0.60 0.14 85);     /* Golden warning */
+  --color-danger: oklch(0.50 0.16 25);      /* Coral danger */
+  --color-accent: oklch(0.55 0.10 210);     /* Water accent */
+}
+
+/* Ancient Scroll Theme - Biblical parchment */
+html[data-theme="ancient-scroll"] {
+  --color-bg: oklch(0.92 0.03 65);          /* Aged parchment background */
+  --color-fg: oklch(0.15 0.02 45);          /* Dark brown text like old ink */
+  --color-surface: oklch(0.88 0.04 65);     /* Slightly darker parchment */
+  --color-border: oklch(0.70 0.06 45);      /* Aged border color */
+  
+  --color-primary: oklch(0.30 0.08 45);     /* Deep brown for links */
+  --color-primary-foreground: oklch(0.92 0.03 65);
+
+  /* Status colors in earth tones */
+  --color-success: oklch(0.40 0.10 120);    /* Deep green success */
+  --color-warning: oklch(0.55 0.12 75);     /* Amber warning */
+  --color-danger: oklch(0.45 0.14 35);      /* Earth red danger */
+  --color-accent: oklch(0.50 0.08 45);      /* Brown accent */
+}
+
+/* Vision Pro Light - Enhanced accessibility */
+html[data-theme="accessible-light-pro"] {
+  --color-bg: oklch(0.98 0 0);              /* Pure white background */
+  --color-fg: oklch(0.05 0 0);              /* Very dark text for maximum contrast */
+  --color-surface: oklch(0.94 0 0);         /* Light gray surface */
+  --color-border: oklch(0.60 0 0);          /* Strong border contrast */
+  
+  --color-primary: oklch(0.20 0 0);         /* Dark gray primary (no color) */
+  --color-primary-foreground: oklch(0.98 0 0);
+
+  /* Monochrome status colors for color blind accessibility */
+  --color-success: oklch(0.25 0 0);         /* Dark gray for success */
+  --color-warning: oklch(0.35 0 0);         /* Medium gray for warning */
+  --color-danger: oklch(0.15 0 0);          /* Very dark gray for danger */
+  --color-accent: oklch(0.30 0 0);          /* Gray accent */
+}
+
+/* Vision Pro Dark - Enhanced dark accessibility */
+html[data-theme="accessible-dark-pro"] {
+  --color-bg: oklch(0.02 0 0);              /* Very dark background */
+  --color-fg: oklch(0.95 0 0);              /* Very light text for maximum contrast */
+  --color-surface: oklch(0.06 0 0);         /* Dark surface */
+  --color-border: oklch(0.40 0 0);          /* Strong border contrast */
+  
+  --color-primary: oklch(0.80 0 0);         /* Light gray primary (no color) */
+  --color-primary-foreground: oklch(0.02 0 0);
+
+  /* Monochrome status colors for color blind accessibility */
+  --color-success: oklch(0.75 0 0);         /* Light gray for success */
+  --color-warning: oklch(0.65 0 0);         /* Medium light gray for warning */
+  --color-danger: oklch(0.85 0 0);          /* Very light gray for danger */
+  --color-accent: oklch(0.70 0 0);          /* Gray accent */
+}
+
+/* Singapore Pride Theme - Red and white */
+html[data-theme="singapore-pride"] {
+  --color-bg: oklch(0.98 0.01 15);          /* Clean white with subtle red tint */
+  --color-fg: oklch(0.15 0.02 15);          /* Dark red-tinted text */
+  --color-surface: oklch(0.97 0.025 15);    /* Slightly more intense pale red surface for nav and cards */
+  --color-border: oklch(0.82 0.04 15);      /* Soft red borders */
+  
+  --color-primary: oklch(0.45 0.28 15);     /* Bright Singapore red for active links */
+  --color-primary-foreground: oklch(0.985 0.015 15);
+
+  /* Status colors in red theme */
+  --color-success: oklch(0.40 0.20 15);     /* Bright red success */
+  --color-warning: oklch(0.60 0.18 45);     /* Orange-red warning */
+  --color-danger: oklch(0.35 0.28 15);      /* Deep bright red for danger and footer borders */
+  --color-accent: oklch(0.45 0.25 15);      /* Bright red accent */
+}
+
+/* Flag Patriot Theme - Blue, red, and white */
+html[data-theme="flag-patriot"] {
+  --color-bg: oklch(0.98 0 0);              /* Clean white background */
+  --color-fg: oklch(0.15 0.02 240);         /* Navy blue text */
+  --color-surface: oklch(0.94 0.02 240);    /* Light blue surface */
+  --color-border: oklch(0.75 0.08 15);      /* Red borders for accent */
+  
+  --color-primary: oklch(0.45 0.22 15);     /* Patriotic red for ACTIVE elements only */
+  --color-primary-foreground: oklch(0.98 0 0);
+
+  /* Tricolor status system */
+  --color-success: oklch(0.40 0.15 240);    /* Navy blue success */
+  --color-warning: oklch(0.55 0.18 15);     /* Red warning */
+  --color-danger: oklch(0.45 0.20 15);      /* Deep red danger */
+  --color-accent: oklch(0.50 0.12 240);     /* Blue accent */
+}
+
+/* Forest Grove Theme - Nature inspired greens */
+html[data-theme="forest-grove"] {
+  --color-bg: oklch(0.96 0.02 140);         /* Light sage green background */
+  --color-fg: oklch(0.12 0.03 140);         /* Deep forest green text */
+  --color-surface: oklch(0.92 0.03 140);    /* Soft green surface */
+  --color-border: oklch(0.75 0.06 140);     /* Medium green borders */
+  
+  --color-primary: oklch(0.30 0.12 140);    /* Deep forest green primary */
+  --color-primary-foreground: oklch(0.96 0.02 140);
+
+  /* Earth-tone status colors */
+  --color-success: oklch(0.35 0.15 140);    /* Rich green success */
+  --color-warning: oklch(0.55 0.14 75);     /* Golden amber warning */
+  --color-danger: oklch(0.45 0.12 25);      /* Earth red danger */
+  --color-accent: oklch(0.40 0.10 140);     /* Forest green accent */
+}
+
+/* Steel Harbor Theme - Sophisticated dark blue-gray */
+html[data-theme="steel-harbor"] {
+  --color-bg: oklch(0.18 0.02 225);         /* Much darker blue-gray background to match screenshot */
+  --color-fg: oklch(0.85 0.01 225);         /* Light blue-gray text */
+  --color-surface: oklch(0.22 0.025 225);   /* Slightly lighter surface */
+  --color-border: oklch(0.35 0.03 225);     /* More visible borders */
+  
+  --color-primary: oklch(0.55 0.08 225);    /* Muted blue for links */
+  --color-primary-foreground: oklch(0.95 0.01 225);
+
+  /* Status colors in blue-gray tones */
+  --color-success: oklch(0.55 0.06 150);    /* Success in teal-blue */
+  --color-warning: oklch(0.65 0.08 85);     /* Warning in golden tone */
+  --color-danger: oklch(0.50 0.10 25);      /* Danger in red-orange */
+  --color-accent: oklch(0.60 0.06 225);     /* Accent blue-gray */
 }

@@ -28,11 +28,11 @@
     },
     {
       "id": "classic-editorial",
-      "name": "Professional",
-      "description": "Professional theme inspired by traditional publishing"
+      "name": "Daily Herald",
+      "description": "Classic newspaper-inspired theme for serious reading"
     },
     {
-      "id": "luxury-dark",
+      "id": "lamborghini",
       "name": "Lamborghini",
       "description": "Bold and dynamic luxury theme with racing inspiration"
     },
@@ -40,6 +40,46 @@
       "id": "teh-tarik",
       "name": "Teh Tarik",
       "description": "Warm Malaysian-inspired theme with rich browns and creams"
+    },
+    {
+      "id": "steel-harbor",
+      "name": "Steel Harbor",
+      "description": "Sophisticated dark blue-gray theme for focused reading"
+    },
+    {
+      "id": "water-flow",
+      "name": "Water Flow",
+      "description": "Calming aquatic theme with flowing blue tones"
+    },
+    {
+      "id": "ancient-scroll",
+      "name": "Ancient Scroll",
+      "description": "Biblical parchment theme with aged paper warmth"
+    },
+    {
+      "id": "accessible-light-pro",
+      "name": "Vision Pro Light",
+      "description": "Enhanced light theme optimized for color blind users"
+    },
+    {
+      "id": "accessible-dark-pro",
+      "name": "Vision Pro Dark",
+      "description": "Enhanced dark theme optimized for color blind users"
+    },
+    {
+      "id": "singapore-pride",
+      "name": "Singapore Pride",
+      "description": "Red and white theme inspired by Singapore's flag"
+    },
+    {
+      "id": "flag-patriot",
+      "name": "Flag Patriot",
+      "description": "Blue, red, and white theme inspired by national flags"
+    },
+    {
+      "id": "forest-grove",
+      "name": "Forest Grove",
+      "description": "Nature-inspired theme with lush greens and earth tones"
     }
   ]
 }
