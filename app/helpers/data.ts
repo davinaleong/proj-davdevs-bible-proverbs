@@ -74,19 +74,6 @@ export const getThemeById = (id: string): Theme | undefined => {
   return themesData.themes.find(theme => theme.id === id);
 };
 
-export const getThemesByCategory = (categoryName: string): Theme[] => {
-  const category = themesData.categories.find(cat => cat.name === categoryName);
-  if (!category) return [];
-  
-  return category.themes
-    .map(themeId => getThemeById(themeId))
-    .filter((theme): theme is Theme => theme !== undefined);
-};
-
-export const getThemeCategories = () => {
-  return themesData.categories;
-};
-
 // Format date using selected format
 export const formatDate = (date: Date, formatId?: string): string => {
   const dateFormat = formatId ? getDateFormatById(formatId) : getDefaultDateFormat();
