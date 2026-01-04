@@ -34,7 +34,7 @@ function DropdownModal({
 }: DropdownModalProps) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-surface border border-border rounded-sm p-6 w-full max-w-md">
+      <div className="bg-surface border border-gray-200 rounded-sm p-6 w-full max-w-md">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-medium">{title}</h2>
           <button 
@@ -54,10 +54,10 @@ function DropdownModal({
                 onClose();
               }}
               className={`
-                w-full text-left px-3 py-2 rounded transition-colors
+                w-full text-left px-3 py-2 rounded-sm transition-colors
                 ${currentValue === option.value 
                   ? 'bg-primary/20 text-primary' 
-                  : 'hover:bg-border/20'
+                  : 'hover:bg-gray-100'
                 }
               `}
             >
@@ -75,13 +75,13 @@ function DropdownModal({
                 }
                 onClose();
               }}
-              className="px-4 py-2 text-sm bg-accent/10 text-accent rounded hover:bg-accent/20 transition-colors"
+              className="px-4 py-2 text-sm bg-accent/10 text-accent rounded-sm hover:bg-accent/20 transition-colors"
             >
               Set to Default
             </button>
             <button
               onClick={onClose}
-              className="px-4 py-2 text-sm bg-border/20 rounded hover:bg-border/30 transition-colors"
+              className="px-4 py-2 text-sm bg-gray-100 rounded-sm hover:bg-gray-200 transition-colors"
             >
               Cancel
             </button>
@@ -149,70 +149,70 @@ export default function SettingsPage() {
       
       <div className="space-y-4 mb-8">
         {/* Text Scale */}
-        <div className="flex items-center justify-between py-3 border-b border-border/50">
+        <div className="flex items-center justify-between py-3 border-b border-gray-200/50">
           <div>
             <div className="font-medium">Text Size</div>
             <div className="text-sm text-fg/70">Adjust the reading text size</div>
           </div>
           <button 
             onClick={() => setActiveModal('textScale')}
-            className="px-4 py-2 text-sm border border-border rounded hover:bg-border/20 transition-colors min-h-[32px]"
+            className="px-4 py-2 text-sm border border-gray-200 rounded-sm hover:bg-gray-100 transition-colors min-h-[32px]"
           >
             {getDisplayValue('textScale')}
           </button>
         </div>
 
         {/* Favourite Theme */}
-        <div className="flex items-center justify-between py-3 border-b border-border/50">
+        <div className="flex items-center justify-between py-3 border-b border-gray-200/50">
           <div>
             <div className="font-medium">Favourite Theme</div>
             <div className="text-sm text-fg/70">Choose your preferred visual style</div>
           </div>
           <button 
             onClick={() => setActiveModal('favouriteTheme')}
-            className="px-4 py-2 text-sm border border-border rounded hover:bg-border/20 transition-colors min-h-[32px]"
+            className="px-4 py-2 text-sm border border-gray-200 rounded-sm hover:bg-gray-100 transition-colors min-h-[32px]"
           >
             {getDisplayValue('favouriteTheme')}
           </button>
         </div>
 
         {/* Favourite Translation */}
-        <div className="flex items-center justify-between py-3 border-b border-border/50">
+        <div className="flex items-center justify-between py-3 border-b border-gray-200/50">
           <div>
             <div className="font-medium">Favourite Translation</div>
             <div className="text-sm text-fg/70">Default Bible translation to display</div>
           </div>
           <button 
             onClick={() => setActiveModal('favouriteTranslation')}
-            className="px-4 py-2 text-sm border border-border rounded hover:bg-border/20 transition-colors min-h-[32px]"
+            className="px-4 py-2 text-sm border border-gray-200 rounded-sm hover:bg-gray-100 transition-colors min-h-[32px]"
           >
             {getDisplayValue('favouriteTranslation')}
           </button>
         </div>
 
         {/* Date Format */}
-        <div className="flex items-center justify-between py-3 border-b border-border/50">
+        <div className="flex items-center justify-between py-3 border-b border-gray-200/50">
           <div>
             <div className="font-medium">Date Format</div>
             <div className="text-sm text-fg/70">How dates are displayed throughout the app</div>
           </div>
           <button 
             onClick={() => setActiveModal('dateFormat')}
-            className="px-4 py-2 text-sm border border-border rounded hover:bg-border/20 transition-colors min-h-[32px]"
+            className="px-4 py-2 text-sm border border-gray-200 rounded-sm hover:bg-gray-100 transition-colors min-h-[32px]"
           >
             {getDisplayValue('dateFormat')}
           </button>
         </div>
 
         {/* Persist Settings */}
-        <div className="flex items-center justify-between py-3 border-b border-border/50">
+        <div className="flex items-center justify-between py-3 border-b border-gray-200/50">
           <div>
             <div className="font-medium">Persist Settings</div>
             <div className="text-sm text-fg/70">Save preferences in your browser</div>
           </div>
           <button 
             onClick={() => setActiveModal('persistSettings')}
-            className="px-4 py-2 text-sm border border-border rounded hover:bg-border/20 transition-colors min-h-[32px]"
+            className="px-4 py-2 text-sm border border-gray-200 rounded-sm hover:bg-gray-100 transition-colors min-h-[32px]"
           >
             {getDisplayValue('persistSettings')}
           </button>
@@ -220,7 +220,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Default All Button */}
-      <div className="pt-4 border-t border-border">
+      <div className="pt-4 border-t border-gray-200">
         <button
           onClick={handleResetAll}
           className="px-6 py-3 bg-danger/10 text-danger rounded-sm hover:bg-danger/20 transition-colors font-medium"
