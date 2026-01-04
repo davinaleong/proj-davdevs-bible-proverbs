@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import translationsData from '../data/translations.json';
 import { getCurrentTranslation, updateSetting } from '../helpers/settings';
 import { PageHeader, ButtonCard, Badge, InfoBox } from '../components';
 
-export default function TranslationsPage() {
+function TranslationSelection() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [currentTranslation, setCurrentTranslation] = useState<string>('');
@@ -90,5 +90,19 @@ export default function TranslationsPage() {
         </ul>
       </InfoBox>
     </div>
+  );
+}
+
+export default function TranslationsPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center py-8">
+        <div className="text-center">
+          <div className="text-lg font-medium animate-pulse">Loading translations...</div>
+        </div>
+      </div>
+    }>
+      <TranslationSelection />
+    </Suspense>
   );
 }
