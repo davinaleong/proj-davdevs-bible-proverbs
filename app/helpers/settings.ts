@@ -31,9 +31,17 @@ export const THEME_OPTIONS = [
   { value: 'davdevs-paper', label: 'Dav/Devs Light' },
   { value: 'davdevs-night', label: 'Dav/Devs Dark' },
   { value: 'rose-devotion', label: 'Pretty Pink' },
-  { value: 'classic-editorial', label: 'Professional' },
-  { value: 'luxury-dark', label: 'Lamborghini' },
+  { value: 'classic-editorial', label: 'Daily Herald' },
+  { value: 'lamborghini', label: 'Lamborghini' },
   { value: 'teh-tarik', label: 'Teh Tarik' },
+  { value: 'steel-harbor', label: 'Steel Harbor' },
+  { value: 'water-flow', label: 'Water Flow' },
+  { value: 'ancient-scroll', label: 'Ancient Scroll' },
+  { value: 'accessible-light-pro', label: 'Vision Pro Light' },
+  { value: 'accessible-dark-pro', label: 'Vision Pro Dark' },
+  { value: 'singapore-pride', label: 'Singapore Pride' },
+  { value: 'flag-patriot', label: 'Flag Patriot' },
+  { value: 'forest-grove', label: 'Forest Grove' },
 ] as const;
 
 export const TRANSLATION_OPTIONS = [
