@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import translationsData from '../data/translations.json';
 import { getCurrentChapter } from '../helpers/date';
 import { getCurrentTranslation, updateSetting } from '../helpers/settings';
 
-export default function ChaptersPage() {
+function ChapterSelection() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [currentTranslation, setCurrentTranslation] = useState<string>('');
@@ -118,5 +118,19 @@ export default function ChaptersPage() {
         </Link>
       </div>
     </div>
+  );
+}
+
+export default function ChaptersPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center py-8">
+        <div className="text-center">
+          <div className="text-lg font-medium animate-pulse">Loading chapters...</div>
+        </div>
+      </div>
+    }>
+      <ChapterSelection />
+    </Suspense>
   );
 }
