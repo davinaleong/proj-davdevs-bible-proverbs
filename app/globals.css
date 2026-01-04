@@ -284,15 +284,21 @@ html[data-theme="davdevs-night"] {
   --color-primary-foreground: oklch(0.15 0 0);
 }
 
-/* Pretty Pink Theme - Designed for girl readers */
+/* Pretty Pink Theme - Monochromatic rose-pink theme designed for girl readers */
 html[data-theme="rose-devotion"] {
-  --color-bg: oklch(0.94 0.03 350);        /* Soft pink background */
-  --color-fg: oklch(0.25 0.02 320);        /* Dark purple-pink text */
-  --color-surface: oklch(0.82 0.05 280);   /* Lavender purple surfaces */
-  --color-border: oklch(0.75 0.04 300);    /* Purple-pink borders */
+  --color-bg: oklch(0.97 0.02 330);        /* Very light rose-pink background */
+  --color-fg: oklch(0.25 0.04 330);        /* Dark rose-pink text */
+  --color-surface: oklch(0.92 0.03 330);   /* Light rose-pink surfaces */
+  --color-border: oklch(0.75 0.05 330);    /* Medium rose-pink borders */
   
-  --color-primary: oklch(0.55 0.12 280);   /* Medium purple for links */
-  --color-primary-foreground: oklch(0.94 0.03 350);
+  --color-primary: oklch(0.55 0.15 330);   /* Vibrant rose-pink for links and buttons */
+  --color-primary-foreground: oklch(0.97 0.02 330);
+
+  /* Status colors in pink tones */
+  --color-success: oklch(0.60 0.08 330);   /* Rose-pink success */
+  --color-warning: oklch(0.70 0.12 330);   /* Light rose-pink warning */
+  --color-danger: oklch(0.45 0.18 330);    /* Deep rose-pink for danger */
+  --color-accent: oklch(0.65 0.10 330);    /* Medium rose-pink accent */
 }
 
 /* Classic Editorial Theme */
@@ -306,15 +312,21 @@ html[data-theme="classic-editorial"] {
   --color-primary-foreground: oklch(0.95 0.005 60);
 }
 
-/* Lamborghini Theme - Yellow Gallardo Inspired Light Theme */
+/* Lamborghini Theme - Authentic Gallardo Yellow Theme */
 html[data-theme="lamborghini"] {
-  --color-bg: oklch(0.95 0.12 95);          /* Pure yellow background */
-  --color-fg: oklch(0.12 0.02 45);          /* Darker text for better contrast */
-  --color-surface: oklch(0.91 0.10 95);     /* Pure yellow surface with slight depth */
-  --color-border: oklch(0.78 0.08 95);      /* Pure yellow borders */
+  --color-bg: oklch(0.96 0.18 85);          /* Authentic Gallardo yellow background */
+  --color-fg: oklch(0.15 0.03 85);          /* Dark yellow-brown text */
+  --color-surface: oklch(0.92 0.15 85);     /* Rich Gallardo yellow surface */
+  --color-border: oklch(0.75 0.12 85);      /* Medium Gallardo yellow borders */
   
-  --color-primary: oklch(0.75 0.15 90);     /* Pure bright yellow for buttons */
-  --color-primary-foreground: oklch(0.08 0.01 45);
+  --color-primary: oklch(0.70 0.20 85);     /* Vibrant Gallardo yellow for buttons */
+  --color-primary-foreground: oklch(0.10 0.02 85);
+
+  /* Status colors in yellow tones */
+  --color-success: oklch(0.65 0.15 85);     /* Success in yellow tone */
+  --color-warning: oklch(0.80 0.18 85);     /* Bright warning yellow */
+  --color-danger: oklch(0.50 0.20 85);      /* Darker yellow-orange danger */
+  --color-accent: oklch(0.75 0.16 85);      /* Accent yellow */
 }
 
 /* Teh Tarik Theme */

@@ -2,7 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import themesData from '../data/themes.json';
+import themePreviewData from '../data/themePreviewColors.json';
 import { loadSettings, updateSetting } from '../helpers/settings';
+
+// Get preview colors for each theme
+const getThemePreviewColors = (themeId: string): string[] => {
+  return themePreviewData.themePreviewColors[themeId as keyof typeof themePreviewData.themePreviewColors] 
+    || themePreviewData.defaultColors;
+};
 
 export default function ThemesPage() {
   const [currentTheme, setCurrentTheme] = useState<string>('');
@@ -35,7 +42,7 @@ export default function ThemesPage() {
         </span>
       </header>
       
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2">
         {themesData.themes.map((theme) => {
           const isActive = currentTheme === theme.id;
           
@@ -69,12 +76,15 @@ export default function ThemesPage() {
               </div>
               <p className="text-sm text-fg/70 leading-relaxed">{theme.description}</p>
               
-              {/* Theme preview bar */}
+              {/* Theme preview bar with actual theme colors */}
               <div className="mt-3 flex gap-1 h-2">
-                <div className="flex-1 bg-primary/60 rounded-full"></div>
-                <div className="flex-1 bg-accent/60 rounded-full"></div>
-                <div className="flex-1 bg-success/60 rounded-full"></div>
-                <div className="flex-1 bg-warning/60 rounded-full"></div>
+                {getThemePreviewColors(theme.id).map((color, index) => (
+                  <div 
+                    key={index}
+                    className="flex-1 rounded-full" 
+                    style={{ backgroundColor: color }}
+                  />
+                ))}
               </div>
             </button>
           );
