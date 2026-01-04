@@ -72,7 +72,7 @@ export default function ChaptersPage() {
               onClick={() => handleChapterClick(chapter)}
               className={`
                 aspect-square flex items-center justify-center relative
-                border rounded-lg transition-all duration-200
+                border rounded-sm transition-all duration-200
                 text-lg font-semibold min-h-[var(--tap-target)]
                 ${isToday 
                   ? 'border-primary bg-primary/10 text-primary shadow-md ring-2 ring-primary/20' 
@@ -91,7 +91,7 @@ export default function ChaptersPage() {
         })}
       </div>
       
-      <div className="mt-8 p-4 bg-surface border border-border rounded-lg">
+      <div className="mt-8 p-4 bg-surface border border-border rounded-sm">
         <h3 className="font-medium mb-2">📜 Book of Proverbs</h3>
         <p className="text-sm text-fg/70 leading-relaxed mb-3">
           The Book of Proverbs contains 31 chapters of divine wisdom and practical guidance for daily living. 
@@ -106,13 +106,13 @@ export default function ChaptersPage() {
       <div className="mt-4 flex gap-2 flex-wrap">
         <button
           onClick={goToTodaysChapter}
-          className="px-4 py-2 bg-accent/10 text-accent rounded-lg hover:bg-accent/20 transition-colors font-medium"
+          className="px-4 py-2 bg-accent/10 text-accent rounded-sm hover:bg-accent/20 transition-colors font-medium"
         >
           📅 Go to Today's Chapter ({todaysChapter})
         </button>
         <Link
           href="/"
-          className="px-4 py-2 bg-border/20 rounded-lg hover:bg-border/30 transition-colors"
+          className="px-4 py-2 bg-border/20 rounded-sm hover:bg-border/30 transition-colors"
         >
           ← Back to Home
         </Link>

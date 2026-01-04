@@ -53,7 +53,7 @@ export default function TranslationsPage() {
               onClick={() => selectTranslation(translation.code)}
               className={`
                 w-full flex items-center justify-between p-4 text-left 
-                border rounded-lg transition-all duration-200
+                border rounded-sm transition-all duration-200
                 min-h-[var(--tap-target)]
                 ${isActive 
                   ? 'border-primary bg-primary/10 shadow-sm ring-2 ring-primary/20' 
@@ -89,7 +89,7 @@ export default function TranslationsPage() {
         })}
       </div>
       
-      <div className="mt-8 p-4 bg-surface border border-border rounded-lg">
+      <div className="mt-8 p-4 bg-surface border border-border rounded-sm">
         <h3 className="font-medium mb-2">📖 About Translations</h3>
         <p className="text-sm text-fg/70 leading-relaxed mb-3">
           Your selected translation will become your new favorite and will be used as the default for future visits. 

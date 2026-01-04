@@ -34,7 +34,7 @@ function DropdownModal({
 }: DropdownModalProps) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-surface border border-border rounded-lg p-6 w-full max-w-md">
+      <div className="bg-surface border border-border rounded-sm p-6 w-full max-w-md">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-medium">{title}</h2>
           <button 
@@ -223,7 +223,7 @@ export default function SettingsPage() {
       <div className="pt-4 border-t border-border">
         <button
           onClick={handleResetAll}
-          className="px-6 py-3 bg-danger/10 text-danger rounded-lg hover:bg-danger/20 transition-colors font-medium"
+          className="px-6 py-3 bg-danger/10 text-danger rounded-sm hover:bg-danger/20 transition-colors font-medium"
         >
           Reset All to Defaults
         </button>
