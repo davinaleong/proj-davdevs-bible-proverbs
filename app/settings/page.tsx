@@ -264,8 +264,8 @@ export default function SettingsPage() {
           currentValue={settings.favouriteTranslation}
           onSelect={(value) => handleUpdateSetting('favouriteTranslation', value)}
           onClose={() => setActiveModal(null)}
-          onDefault={() => handleUpdateSetting('favouriteTranslation', 'KJV')}
-          defaultValue="KJV"
+          onDefault={() => handleUpdateSetting('favouriteTranslation', 'web')}
+          defaultValue="web"
         />
       )}
 

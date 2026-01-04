@@ -1,97 +1,41 @@
 /**
- * MDX content loader utility for the Dav/Devs Bible Proverbs app
+ * Bible API content loader utility for the Dav/Devs Bible Proverbs app
  */
 
-import { ReactElement } from 'react';
+import { fetchProverbsChapter, BibleChapter } from './bible-api';
 
 export interface ChapterContent {
-  content: ReactElement | null;
+  content: BibleChapter | null;
   error: string | null;
   isLoading: boolean;
 }
 
 /**
- * Load MDX content for a specific translation and chapter
+ * Load Bible content for a specific translation and chapter using bible-api.com
  */
 export async function loadChapterContent(
   translation: string, 
   chapter: number
-): Promise<{ content: ReactElement | null; error: string | null }> {
-  try {
-    // Validate chapter number
-    if (chapter < 1 || chapter > 31) {
-      return {
-        content: null,
-        error: `Invalid chapter number: ${chapter}. Proverbs has 31 chapters.`
-      };
-    }
-
-    // Try to dynamically import the MDX file
-    const chapterModule = await import(`../content/${translation}/chapter-${chapter}.mdx`);
-    
-    // MDX files export a default component
-    const ContentComponent = chapterModule.default;
-    
-    if (!ContentComponent) {
-      return {
-        content: null,
-        error: `Chapter ${chapter} content not found for ${translation} translation.`
-      };
-    }
-
-    // Return the React component
-    return {
-      content: ContentComponent({}),
-      error: null
-    };
-    
-  } catch (error) {
-    console.error(`Error loading chapter ${chapter} for ${translation}:`, error);
-    
-    // Check if it's a module not found error
-    if (error instanceof Error && error.message.includes('Cannot resolve module')) {
-      return {
-        content: null,
-        error: `Chapter ${chapter} is not available for ${translation} translation.`
-      };
-    }
-    
-    return {
-      content: null,
-      error: `Failed to load chapter ${chapter} for ${translation} translation.`
-    };
-  }
+): Promise<{ content: BibleChapter | null; error: string | null }> {
+  // Use the Bible API to fetch content
+  return await fetchProverbsChapter(translation, chapter);
 }
 
 /**
- * Check if a chapter exists for a given translation
+ * Check if a chapter exists for a given translation (all Proverbs chapters 1-31 exist)
  */
 export async function checkChapterExists(
   translation: string, 
   chapter: number
 ): Promise<boolean> {
-  try {
-    await import(`../content/${translation}/chapter-${chapter}.mdx`);
-    return true;
-  } catch {
-    return false;
-  }
+  return chapter >= 1 && chapter <= 31;
 }
 
 /**
- * Get all available chapters for a translation
+ * Get all available chapters for a translation (Proverbs has 31 chapters)
  */
 export async function getAvailableChapters(translation: string): Promise<number[]> {
-  const chapters: number[] = [];
-  
-  // Check chapters 1-31
-  for (let i = 1; i <= 31; i++) {
-    if (await checkChapterExists(translation, i)) {
-      chapters.push(i);
-    }
-  }
-  
-  return chapters;
+  return Array.from({ length: 31 }, (_, i) => i + 1);
 }
 
 /**
@@ -99,8 +43,8 @@ export async function getAvailableChapters(translation: string): Promise<number[
  */
 export function preloadNextChapter(translation: string, currentChapter: number): void {
   if (currentChapter < 31) {
-    // Use dynamic import to preload
-    import(`../content/${translation}/chapter-${currentChapter + 1}.mdx`)
+    // Preload next chapter in background
+    fetchProverbsChapter(translation, currentChapter + 1)
       .catch(() => {
         // Silently ignore preload failures
       });
@@ -112,8 +56,8 @@ export function preloadNextChapter(translation: string, currentChapter: number):
  */
 export function preloadPreviousChapter(translation: string, currentChapter: number): void {
   if (currentChapter > 1) {
-    // Use dynamic import to preload
-    import(`../content/${translation}/chapter-${currentChapter - 1}.mdx`)
+    // Preload previous chapter in background
+    fetchProverbsChapter(translation, currentChapter - 1)
       .catch(() => {
         // Silently ignore preload failures
       });

@@ -7,6 +7,7 @@ import translationsData from './data/translations.json';
 import { getCurrentChapter, getProverbDescription, formatDate } from './helpers/date';
 import { loadSettings, getCurrentTranslation } from './helpers/settings';
 import { loadChapterContent, getChapterNavigation, preloadNextChapter, preloadPreviousChapter } from './helpers/content';
+import { BibleChapter } from './helpers/bible-api';
 
 // Loading component for suspense
 function ChapterContent() {
@@ -14,7 +15,7 @@ function ChapterContent() {
   const router = useRouter();
   const [currentTranslation, setCurrentTranslation] = useState<string>('');
   const [currentChapter, setCurrentChapter] = useState<number>(1);
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<BibleChapter | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string>('');
   const [isToday, setIsToday] = useState<boolean>(false);
@@ -66,7 +67,7 @@ function ChapterContent() {
 
   const settings = loadSettings();
   const todaysDate = formatDate(new Date(), settings.dateFormat);
-  const translationInfo = translationsData.translations.find(t => t.code === currentTranslation);
+  const translationInfo = translationsData.translations.find(t => t.code.toLowerCase() === currentTranslation.toLowerCase());
   const navigation = getChapterNavigation(currentChapter);
 
   const goToToday = () => {
@@ -78,7 +79,7 @@ function ChapterContent() {
     return (
       <div className="flex items-center justify-center py-8">
         <div className="text-center">
-          <div className="text-lg font-medium mb-2">Loading {getProverbDescription(currentChapter)}...</div>
+          <div className="text-lg font-medium mb-2 animate-pulse">Loading {getProverbDescription(currentChapter)}...</div>
           <div className="text-sm text-fg/70">{translationInfo?.name}</div>
         </div>
       </div>
@@ -111,7 +112,7 @@ function ChapterContent() {
     <div>
       <header className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-semibold">Today's Proverb</h1>
+          <h1 className="text-3xl font-semibold">Proverb {currentChapter}</h1>
           <p className="text-sm text-fg/70 mt-1">{translationInfo?.name} ({currentTranslation})</p>
         </div>
         <div className="flex items-center gap-4">
@@ -138,15 +139,25 @@ function ChapterContent() {
       <div className="max-w-none" style={{ fontSize: 'var(--font-size-lg)', lineHeight: '1.7' }}>
         {content ? (
           <div className="chapter-content space-y-4">
-            {content}
+            <div className="mb-6">
+              <h2 className="text-xl font-semibold mb-4">{content.reference}</h2>
+              <div className="space-y-3">
+                {content.verses.map((verse, index) => (
+                  <div key={index} className="verse-container">
+                    <span className="verse-number text-primary/60 text-sm font-mono mr-2">{verse.verse}</span>
+                    <span className="verse-text">{verse.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         ) : (
           <div className="mb-4 p-4 bg-surface border border-border rounded-md">
             <p className="mb-2" style={{ fontSize: 'var(--font-size-base)' }}>
-              <strong>Note:</strong> MDX content loading not yet implemented.
+              <strong>Note:</strong> Bible content loading from API...
             </p>
             <p className="leading-relaxed" style={{ fontSize: 'var(--font-size-lg)' }}>
-              Content for Proverbs Chapter {currentChapter} ({translationInfo?.name || currentTranslation}) would be rendered here from the MDX file.
+              Content for Proverbs Chapter {currentChapter} ({translationInfo?.name || currentTranslation}) is being fetched from bible-api.com.
             </p>
           </div>
         )}

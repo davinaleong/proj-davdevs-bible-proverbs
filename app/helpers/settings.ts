@@ -15,7 +15,7 @@ export interface AppSettings {
 export const DEFAULT_SETTINGS: AppSettings = {
   textScale: 'medium',
   favouriteTheme: 'davdevs-paper',
-  favouriteTranslation: 'KJV',
+  favouriteTranslation: 'web',
   dateFormat: 'dd mmm yyyy',
   persistSettings: true,
 };
@@ -45,10 +45,12 @@ export const THEME_OPTIONS = [
 ] as const;
 
 export const TRANSLATION_OPTIONS = [
-  { value: 'KJV', label: 'KJV (King James Version)' },
-  { value: 'YLT', label: 'YLT (Young\'s Literal Translation)' },
-  { value: 'WBT', label: 'WBT (Webster\'s Bible Translation)' },
-  { value: 'ASV', label: 'ASV (American Standard Version)' },
+  { value: 'web', label: 'WEB (World English Bible)' },
+  { value: 'asv', label: 'ASV (American Standard Version 1901)' },
+  { value: 'bbe', label: 'BBE (Bible in Basic English)' },
+  { value: 'darby', label: 'Darby Bible' },
+  { value: 'dra', label: 'DRA (Douay-Rheims 1899 American Edition)' },
+  { value: 'kjv', label: 'KJV (King James Version)' },
 ] as const;
 
 export const DATE_FORMAT_OPTIONS = [

@@ -1,21 +1,29 @@
 {
   "translations": [
     {
-      "code": "KJV",
-      "name": "King James Version",
+      "code": "web",
+      "name": "World English Bible",
       "isDefault": true
     },
     {
-      "code": "YLT", 
-      "name": "Young's Literal Translation"
-    },
-    {
-      "code": "WBT",
-      "name": "Webster's Bible Translation"
-    },
-    {
-      "code": "ASV",
+      "code": "asv",
       "name": "American Standard Version (1901)"
+    },
+    {
+      "code": "bbe",
+      "name": "Bible in Basic English"
+    },
+    {
+      "code": "darby", 
+      "name": "Darby Bible"
+    },
+    {
+      "code": "dra",
+      "name": "Douay-Rheims 1899 American Edition"
+    },
+    {
+      "code": "kjv",
+      "name": "King James Version"
     }
   ]
 }

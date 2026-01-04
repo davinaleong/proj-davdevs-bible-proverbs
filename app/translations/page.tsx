@@ -56,7 +56,7 @@ export default function TranslationsPage() {
             >
               <div className="flex-1">
                 <div className="flex items-center gap-3">
-                  <span className="font-semibold text-lg">{translation.code}</span>
+                  <span className="font-semibold text-lg">{translation.code.toUpperCase()}</span>
                   <div className="flex flex-col">
                     <span className="text-fg/80 text-sm">{translation.name}</span>
                   </div>
@@ -70,9 +70,6 @@ export default function TranslationsPage() {
                   </div>
                 </div>
               </div>
-              <div className="text-primary/60">
-                →
-              </div>
             </ButtonCard>
           );
         })}
@@ -81,11 +78,15 @@ export default function TranslationsPage() {
       <InfoBox title="📖 About Translations" icon="">
         <p className="text-sm text-fg/70 leading-relaxed mb-3">
           Your selected translation will become your new favorite and will be used as the default for future visits. 
-          Each translation offers a unique perspective on the wisdom of Proverbs.
+          Each translation offers a unique perspective on the wisdom of Proverbs, powered by bible-api.com.
         </p>
         <ul className="text-xs text-fg/60 space-y-1">
-          <li><strong>KJV:</strong> Classic English with traditional language and phrasing</li>
-          <li><strong>YLT:</strong> Literal translation maintaining Hebrew word order and meaning</li>
+          <li><strong>WEB:</strong> World English Bible - Modern, public domain translation (default)</li>
+          <li><strong>ASV:</strong> American Standard Version (1901) - Classic American revision</li>
+          <li><strong>BBE:</strong> Bible in Basic English - Simple, accessible language</li>
+          <li><strong>Darby:</strong> J.N. Darby's literal translation</li>
+          <li><strong>DRA:</strong> Douay-Rheims American Edition - Traditional Catholic translation</li>
+          <li><strong>KJV:</strong> King James Version - Traditional English with classic language</li>
         </ul>
       </InfoBox>
     </div>
