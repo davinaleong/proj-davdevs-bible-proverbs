@@ -143,6 +143,99 @@
     line-height: 1.7;
     margin-bottom: 0.5rem;
   }
+
+  /* Static content styling (privacy, terms, etc.) */
+  .prose-static {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    max-width: none;
+  }
+  
+  .prose-static h1 {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .prose-static h1:first-child {
+    margin-top: 0;
+  }
+  
+  .prose-static h2 {
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .prose-static h3 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  
+  .prose-static h4 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .prose-static p {
+    font-size: var(--font-size-base);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  .prose-static strong {
+    font-weight: 600;
+    font-size: inherit;
+  }
+  
+  .prose-static em {
+    font-style: italic;
+    font-size: inherit;
+  }
+  
+  .prose-static ul,
+  .prose-static ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  
+  .prose-static li {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    margin-bottom: 0.25rem;
+  }
+  
+  .prose-static blockquote {
+    font-size: var(--font-size-base);
+    border-left: 4px solid rgb(from var(--color-primary) r g b / 0.3);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    font-style: italic;
+  }
+  
+  .prose-static code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: var(--font-size-sm);
+    background: var(--color-surface);
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+  }
+  
+  .prose-static pre {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: var(--font-size-sm);
+    background: var(--color-surface);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
 }
 
 /* Default = davdevs-paper (paper theme foundation) */
